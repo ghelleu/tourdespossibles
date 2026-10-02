@@ -15,9 +15,15 @@ main{
   gap:1.1rem;padding:0 1.5rem 7vh;text-align:center;
 }
 h1{
-  font-weight:300;font-size:clamp(2rem,7vw,5rem);line-height:1.1;
-  letter-spacing:.02em;color:#F4F5F7;text-wrap:balance;
+  font-weight:700;font-size:clamp(2rem,7vw,5rem);line-height:1.1;
+  letter-spacing:.01em;color:#FFFDF8;text-wrap:balance;
+  text-shadow:0 0 1px rgba(255,250,240,.9),0 0 10px rgba(255,246,232,.55),0 0 28px rgba(255,240,215,.35),0 0 64px rgba(220,230,255,.22);
+  animation:glow 6s ease-in-out infinite alternate;
 }
+@keyframes glow{
+  to{text-shadow:0 0 1px rgba(255,250,240,1),0 0 14px rgba(255,246,232,.75),0 0 40px rgba(255,240,215,.5),0 0 90px rgba(220,230,255,.32)}
+}
+@media (prefers-reduced-motion:reduce){h1{animation:none}}
 .tagline{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:#8B9099;padding-left:.2em}
 footer{
   position:relative;flex:0 0 auto;text-align:center;

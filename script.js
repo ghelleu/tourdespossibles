@@ -9,14 +9,14 @@
   const DEBUG = /[?&]debug=1(&|$)/.test(location.search);
 
   const MAX = 420, TAU = Math.PI * 2;
-  const LIT_R = 170, LINK = 110, LINK2 = LINK * LINK, PTR_LINK = 90, PTR_LINK2 = PTR_LINK * PTR_LINK;
+  const LIT_R = 280, LINK = 135, LINK2 = LINK * LINK, PTR_LINK = 140, PTR_LINK2 = PTR_LINK * PTR_LINK;
   const X = new Float32Array(MAX), Y = new Float32Array(MAX), R = new Float32Array(MAX),
         A = new Float32Array(MAX), PH = new Float32Array(MAX), OM = new Float32Array(MAX);
   const D = new Uint8Array(MAX);
   const litI = new Int16Array(MAX), litF = new Float32Array(MAX);
   const COLORS = ['#DCE6FF', '#E8EEFF', '#FFFFFF'];
 
-  let W = 0, H = 0, dpr = 1, n = 0, starScale = 1, segCap = 220;
+  let W = 0, H = 0, dpr = 1, n = 0, starScale = 1, segCap = 320;
   let raf = 0, last = 0, reduced = reduceMQ.matches;
 
   // pointeur
@@ -26,7 +26,7 @@
 
   // halo précalculé
   const halo = document.createElement('canvas');
-  const HALO = 220;
+  const HALO = 360;
   halo.width = halo.height = HALO * 2;
   {
     const h = halo.getContext('2d');
@@ -86,7 +86,7 @@
         if (d2 < LIT_R * LIT_R) {
           const k = 1 - Math.sqrt(d2) / LIT_R, f = k * Math.sqrt(k) * I; // (1 - d/170)^1.5
           a += (1 - a) * f;
-          r *= 1 + 0.9 * f;
+          r *= 1 + 1.2 * f;
           litI[lit] = i; litF[lit] = f; lit++;
         }
       }
@@ -128,7 +128,7 @@
     }
 
     ctx.globalCompositeOperation = 'lighter';
-    ctx.globalAlpha = 0.11 * I;
+    ctx.globalAlpha = 0.17 * I;
     ctx.drawImage(halo, cx - HALO, cy - HALO);
     ctx.globalAlpha = 0.85 * I;
     ctx.fillStyle = '#FFF6E8';

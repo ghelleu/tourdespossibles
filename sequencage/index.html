@@ -211,7 +211,7 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <li><b>Les vœux ne sont jamais écrits</b>Des caractères cryptiques de toutes les écritures du monde circulent sur l'anneau.</li>
 <li><b>Des teintes chaudes, rétro-tech</b>Couleurs libres pour Structurals, expressives, nettes et graphiques, sans effet bariolé. Le rouge marque l'enregistrement.</li>
 <li><b>Des sons analogiques</b>Les vrais codes de la téléphonie, sonnerie et tonalité occupée, et des sons old school, analogiques voire mécaniques.</li>
-<li><b>Trois washs sur un même lest</b>Un projecteur par niveau, depuis un même point de vue, pour garder la montée de la lumière le long du mât. Proposition à confirmer avec Structurals.</li>
+<li><b>Trois washs fixes</b>Un wash par lest, qui éclaire toute la tour en permanence. La montée de la lumière passe par le tore et les trois diffuseurs du sommet, allumés du bas vers le haut.</li>
 </ul>
 </div></section>
 
@@ -245,7 +245,7 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 const T=220,COLS=377,ROWS=10;
 const MOM=[[0,15,'resp','Respiration'],[15,25,'appel','Appel sans réponse'],[25,45,'resp','Respiration'],[45,48,'appel','Appel'],[48,56,'voix','Transmission, voix'],[56,57,'bip','Bip'],[57,82,'rec','Transmission, vœu n° 9'],[82,92,'envoi','Envoi du vœu n° 9'],[92,96,'resp','Respiration'],[96,99,'hors','Décroché hors appel'],[99,101,'resp','Respiration'],[101,103,'appel','Appel'],[103,111,'voix','Transmission, voix'],[111,112,'bip','Bip'],[112,172,'rec','Transmission, vœu n° 10'],[172,202,'emis','Émission, dixième vœu'],[202,217,'resp','Respiration'],[217,220,'appel','Appel']];
 const SHORT={resp:'Respiration',appel:'Appel',voix:'Voix',bip:'',rec:'REC',envoi:'Envoi',hors:'Occupé',emis:'Émission'};
-const NOW={resp:'La tour vit et attend. Des caractères cryptiques circulent sur l\'anneau, la lumière respire, la nappe sonore tourne.',appel:'Toute la tour sonne avec le téléphone : tore, washs et sommet battent au rythme de la sonnerie.',hors:'Quelqu\'un décroche sans sonnerie et entend la tonalité occupée. Au raccroché, la tour le rappelle.',voix:'La voix de la tour parle au combiné. Au sommet, les diffuseurs s\'allument l\'un après l\'autre, comme une information qui arrive.',bip:'Le bip donne la parole.',rec:'Le visiteur dit son vœu. Une boucle de lumière parcourt l\'anneau, les trois diffuseurs du sommet sont rouges, les enceintes se taisent.',envoi:'Le visiteur raccroche, la tour réagit aussitôt : plasma, éclair, la lumière monte jusqu\'au sommet. La même séquence pour chaque vœu.',emis:'Le dixième vœu déclenche la séquence spéciale : la tour envoie les vœux vers le ciel.'};
+const NOW={resp:'La tour vit et attend. Des caractères cryptiques circulent sur l\'anneau, la lumière respire, la nappe sonore tourne.',appel:'Toute la tour sonne avec le téléphone : le tore et le sommet battent au rythme de la sonnerie.',hors:'Quelqu\'un décroche sans sonnerie et entend la tonalité occupée. Au raccroché, la tour le rappelle.',voix:'La voix de la tour parle au combiné. Au sommet, les diffuseurs s\'allument l\'un après l\'autre, comme une information qui arrive.',bip:'Le bip donne la parole.',rec:'Le visiteur dit son vœu. Une boucle de lumière parcourt l\'anneau, les trois diffuseurs du sommet sont rouges, les enceintes se taisent.',envoi:'Le visiteur raccroche, la tour réagit aussitôt : plasma, éclair, puis les diffuseurs du sommet s\'allument du bas vers le haut. La même séquence pour chaque vœu.',emis:'Le dixième vœu déclenche la séquence spéciale : la tour envoie les vœux vers le ciel.'};
 const RL=[[0,15,'L02'],[15,25,'L03'],[25,45,'L02'],[45,48,'L03'],[48,56,'L05'],[56,82,'L06'],[82,92,'L07'],[92,96,'L02'],[96,99,'L04'],[99,101,'L02'],[101,103,'L03'],[103,111,'L05'],[111,172,'L06'],[172,202,'L09'],[202,217,'L02'],[217,220,'L03']];
 const RC=[[15,25,'A02'],[45,48,'A02'],[48,56,'A04'],[56,57,'A05'],[57,82,'MIC'],[96,99,'A03'],[101,103,'A02'],[103,111,'A04'],[111,112,'A05'],[112,172,'MIC'],[172,175,'A07'],[217,220,'A02']];
 const RS=[[0,57,'A01'],[57,82,'MIC'],[82,92,'A08'],[92,112,'A01'],[112,172,'MIC'],[172,202,'A09'],[202,220,'A01']];
@@ -253,12 +253,12 @@ const RR=[[15,25,'A02'],[45,48,'A02'],[101,103,'A02'],[217,220,'A02']];
 const RE=[[0,15,'E01'],[15,25,'E02'],[25,45,'E01'],[45,48,'E02'],[48,56,'E03'],[56,82,'E04'],[82,92,'E05'],[92,101,'E01'],[101,103,'E02'],[103,111,'E03'],[111,172,'E04'],[172,202,'E05'],[202,217,'E01'],[217,220,'E02']];
 const ZONE={to:()=>true,wa:c=>c!=='L05'&&c!=='L06',so:()=>true,gl:c=>c==='L03'||c==='L09'};
 const STATES=[
-['Respiration','La tour vit et attend.','entre deux appels',0,'Les passants découvrent une tour qui semble vivante. C\'est l\'état que verront le plus de passants, souvent sans décrocher : il doit tenir seul le spectacle.','Respiration lente du tore et battement de cœur ponctuel. Des caractères de toutes les écritures circulent et surgissent sur l\'anneau, en teintes chaudes. Le sommet respire en léger décalage ; les washs éclairent la structure en statique.','Une nappe analogique, souffle et battement, qui tourne en fond. L\'écran affiche la maxime.',['A01','L02','E01']],
-['Appel','La tour convoque.','10 s',15,'Le téléphone sonne au hasard. Celui qui décroche devient celui que la tour a choisi ; les autres regardent. Sans réponse, la tour retombe dans sa respiration et rappellera plus tard.','Toute la tour sonne : tore, sommet et washs battent ensemble, deux coups et un silence. Le globe, s\'il est installé, clignote comme une balise.','Une vraie sonnerie de téléphone, mécanique, qui sort du poste. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez. L\'écran passe en alerte.',['A02','L03','E02']],
+['Respiration','La tour vit et attend.','entre deux appels',0,'Les passants découvrent une tour qui semble vivante. C\'est l\'état que verront le plus de passants, souvent sans décrocher : il doit tenir seul le spectacle.','Respiration lente du tore et battement de cœur ponctuel. Des caractères de toutes les écritures circulent et surgissent sur l\'anneau, en teintes chaudes. Le sommet respire en léger décalage ; les washs éclairent toute la tour en permanence.','Une nappe analogique, souffle et battement, qui tourne en fond. L\'écran affiche la maxime.',['A01','L02','E01']],
+['Appel','La tour convoque.','10 s',15,'Le téléphone sonne au hasard. Celui qui décroche devient celui que la tour a choisi ; les autres regardent. Sans réponse, la tour retombe dans sa respiration et rappellera plus tard.','Toute la tour sonne : le tore et le sommet battent ensemble, deux coups et un silence. Le globe, s\'il est installé, clignote comme une balise.','Une vraie sonnerie de téléphone, mécanique, qui sort du poste. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez. L\'écran passe en alerte.',['A02','L03','E02']],
 ['Décroché hors appel','La ligne est occupée.','jusqu\'au raccroché',96,'Quelqu\'un décroche alors que rien ne sonne et entend la tonalité occupée. Il raccroche ; deux secondes plus tard, la tour le rappelle. Ne joue que pendant la respiration.','La lumière ne change presque pas, à peine un frémissement : toute la surprise tient dans le rappel.','La tonalité occupée, avec les vrais codes sonores de la téléphonie.',['A03','L04']],
-['Transmission','La tour enregistre.','voix, puis vœu de 60 s au plus',48,'La voix dit à l\'oreille : « Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis demande de raccrocher pour envoyer le vœu. Un bip donne la parole ; le raccroché envoie le vœu.','Les washs s\'éteignent et le pied de la tour devient intime. Pendant la voix, le tore est enveloppant et les diffuseurs du sommet s\'allument l\'un après l\'autre, comme une information qui arrive. Pendant le vœu, une boucle de lumière parcourt l\'anneau, coupée au raccroché quelle que soit la durée du vœu ; les trois diffuseurs sont rouges, c\'est le voyant REC de la tour.','La voix et le bip dans le combiné, la nappe en fond pendant la voix. Pendant l\'enregistrement, les enceintes se taisent : c\'est le seul moment de silence. L\'écran donne la traduction, puis le REC et le compte à rebours des 10 dernières secondes.',['A04','A05','A07','L05','L06','E03','E04']],
-['Envoi','La tour réagit au vœu.','10 s, à chaque vœu',82,'Le visiteur raccroche et la tour réagit aussitôt : une cause, un effet. La séquence est la même pour tous les visiteurs et doit avoir une très belle intensité.','Le plasma pulse et se rassemble dans le tore, un éclair le traverse, puis la lumière monte le long du mât, niveau par niveau, jusqu\'au sommet qui s\'illumine. La tour revient ensuite directement à sa respiration.','Une montée électrique, analogique, qui se résout dans un impact. Pas de silence après le vœu.',['A08','L07','E05']],
-['Émission','Tous les dix vœux.','30 s',172,'Le dixième vœu déclenche une séquence spéciale, plus longue et plus intense. Elle ajoute de la surprise et rythme la soirée.','L\'anneau se remplit de lumière et pulse de plus en plus vite ; la lumière monte le long du mât en vagues de plus en plus rapides. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate, le globe lance son flash. La tour revient à sa respiration.','Composition immersive en crescendo, point culminant au tir. Plusieurs variantes alternent d\'une émission à l\'autre.',['A09','L09','E05']]];
+['Transmission','La tour enregistre.','voix, puis vœu de 60 s au plus',48,'La voix dit à l\'oreille : « Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis demande de raccrocher pour envoyer le vœu. Un bip donne la parole ; le raccroché envoie le vœu.','Pendant la voix, le tore est enveloppant et les diffuseurs du sommet s\'allument l\'un après l\'autre, comme une information qui arrive. Pendant le vœu, une boucle de lumière parcourt l\'anneau, coupée au raccroché quelle que soit la durée du vœu ; les trois diffuseurs sont rouges, c\'est le voyant REC de la tour.','La voix et le bip dans le combiné, la nappe en fond pendant la voix. Pendant l\'enregistrement, les enceintes se taisent : c\'est le seul moment de silence. L\'écran donne la traduction, puis le REC et le compte à rebours des 10 dernières secondes.',['A04','A05','A07','L05','L06','E03','E04']],
+['Envoi','La tour réagit au vœu.','10 s, à chaque vœu',82,'Le visiteur raccroche et la tour réagit aussitôt : une cause, un effet. La séquence est la même pour tous les visiteurs et doit avoir une très belle intensité.','Le plasma pulse et se rassemble dans le tore, un éclair le traverse, puis l\'énergie rejoint le sommet : les trois diffuseurs s\'allument du bas vers le haut et s\'illuminent ensemble. La tour revient ensuite directement à sa respiration.','Une montée électrique, analogique, qui se résout dans un impact. Pas de silence après le vœu.',['A08','L07','E05']],
+['Émission','Tous les dix vœux.','30 s',172,'Le dixième vœu déclenche une séquence spéciale, plus longue et plus intense. Elle ajoute de la surprise et rythme la soirée.','L\'anneau se remplit de lumière et pulse de plus en plus vite ; les diffuseurs du sommet s\'allument du bas vers le haut, en vagues de plus en plus rapides. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate, le globe lance son flash. La tour revient à sa respiration.','Composition immersive en crescendo, point culminant au tir. Plusieurs variantes alternent d\'une émission à l\'autre.',['A09','L09','E05']]];
 const FILES=[
 ['A01','Nappe de respiration','enceintes','boucle','Le souffle de la tour, analogique, qui tourne en fond sauf pendant l\'enregistrement du vœu.'],
 ['A02','Sonnerie','poste ; enceintes en renfort','10 s','Une vraie sonnerie de téléphone, mécanique. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez.'],
@@ -268,13 +268,13 @@ const FILES=[
 ['A07','Fin à 60 s','combiné','court','Invite à raccrocher quand la minute est écoulée.'],
 ['A08','Envoi','enceintes','10 s','Une montée électrique, analogique, qui se résout dans un impact ; la même pour chaque vœu.'],
 ['A09','Émission, variantes','enceintes','30 s','Crescendo immersif, point culminant au tir ; plusieurs variantes en alternance.'],
-['L02','Respiration','toutes','boucle','Respiration lente, battement ponctuel, caractères cryptiques en teintes chaudes ; washs fixes sur la structure.'],
-['L03','Appel','toutes, globe','10 s','Toute la tour bat avec la sonnerie, deux coups et un silence.'],
+['L02','Respiration','tore, sommet','boucle','Respiration lente, battement ponctuel, caractères cryptiques en teintes chaudes ; washs fixes sur toute la tour.'],
+['L03','Appel','tore, sommet, globe','10 s','Toute la tour bat avec la sonnerie, deux coups et un silence.'],
 ['L04','Frémissement','tore','court','À peine perceptible, pour qui décroche hors appel.'],
-['L05','Accueil','tore, sommet','durée de A04','Tore enveloppant ; diffuseurs du sommet allumés en séquence, comme une information qui arrive ; washs éteints.'],
+['L05','Accueil','tore, sommet','durée de A04','Tore enveloppant ; diffuseurs du sommet allumés en séquence, comme une information qui arrive.'],
 ['L06','Enregistrement','tore, sommet','0 à 60 s','Une boucle coupée au raccroché, pour s\'adapter à la durée de chaque vœu ; les trois diffuseurs en rouge, voyant REC.'],
-['L07','Envoi','tore, washs, sommet','10 s','Plasma qui se rassemble, éclair, lumière qui monte le long du mât jusqu\'au sommet ; la même séquence pour chaque vœu.'],
-['L09','Émission, variantes','toutes, globe','30 s','Anneau qui se remplit et pulse, vagues de lumière le long du mât, tir : coupure nette, éclat du sommet, flash du globe.'],
+['L07','Envoi','tore, sommet','10 s','Plasma qui se rassemble, éclair, puis les diffuseurs du sommet allumés du bas vers le haut ; la même séquence pour chaque vœu.'],
+['L09','Émission, variantes','tore, sommet, globe','30 s','Anneau qui se remplit et pulse, diffuseurs du sommet en vagues montantes de plus en plus rapides, tir : coupure nette, éclat du sommet, flash du globe.'],
 ['E01','Maxime','écran','respiration','« Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun », en français et en anglais.'],
 ['E02','Alerte d\'appel','écran','appel','Écran rouge, invitation à décrocher.'],
 ['E03','Traduction et consignes','écran','voix','Traduction anglaise de la voix ; parler après le bip, raccrocher pour envoyer.'],
@@ -302,7 +302,7 @@ function chars(t,amp,dens){for(let s=0;s<54;s++){const x0=Math.floor(((s*7-t*3)%
 function model(t){
 const m=momAt(t),k=m[2],u=t-m[0];let w=[0,0,0],so=[0,0,0],rec=false,gl=0,off=false;
 W.fill(0);C.fill(0);
-const br=breath(t),base=[.34,.26,.18];
+const br=breath(t),base=[.34,.26,.18],WB=.3;
 const respSom=i=>.3+.22*Math.sin(2*Math.PI*t/6.5+i*.8)+(h2(i,Math.floor(t*2.3))<.06?.35:0);
 const resp=()=>{chars(t,.4+.45*br+.4*heart(t),.55);for(let i=0;i<COLS*ROWS;i++)W[i]=Math.max(W[i],.03+.04*br);w=base.slice();so=[0,1,2].map(respSom)};
 if(k==='resp'||k==='hors'){resp();if(k==='hors'){off=true;for(let i=0;i<120;i++)put(W,Math.floor(h2(i,Math.floor(t*8))*COLS),Math.floor(h2(i+5,Math.floor(t*8))*ROWS),.45)}}
@@ -314,18 +314,16 @@ else if(k==='envoi'){const p=u;
  if(p<3){const fq=1+p*2,pl=.5+.5*Math.sin(2*Math.PI*fq*p),sp=Math.max(18,190*(1-p/3.3));for(let x=0;x<COLS;x++){const dx=Math.min(x,COLS-x),wgt=Math.exp(-dx/sp);for(let y=0;y<ROWS;y++)C[y*COLS+x]=cl(wgt*(.3+.7*pl)*(.35+.65*h2(x*31+y,Math.floor(p*14)))*(.45+p/3))}}
  else if(p<3.35){W.fill(1)}
  else{const d=Math.exp(-(p-3.35)*1.6);for(let i=0;i<COLS*ROWS;i++)W[i]=.7*d;if(p>5.5){chars(t,(.4+.45*br)*sm(5.5,9,p),.55*sm(5.5,9,p))}}
- w=[0,1,2].map(i=>Math.max(g(p,3.9+i*.75,.32),base[i]*sm(6.5,8.5,p)));
- so=[0,1,2].map(i=>p<5.8?.12:Math.max(p<6.1?sm(5.8,6.1,p):Math.exp(-(p-6.1)*1.2),respSom(i)*sm(7,10,p)));
+ so=[0,1,2].map(i=>p<3.35?.12:Math.max(.1,g(p,3.8+i*.55,.22),p>5.3?Math.exp(-(p-5.3)*1.1):0,respSom(i)*sm(7,10,p)));
 }else if(k==='emis'){const q=u;
  if(q<4.5){chars(t,.35,.4);const f=q/4.5*COLS;for(let x=0;x<f;x++)for(let y=0;y<ROWS;y++)W[y*COLS+x]=.8;w=[.1,.08,.06];so=[.2,.2,.2]}
  else if(q<23){const z=q-4.5,ph=.5*z+3.5*z*z/37,pl=.5+.5*Math.sin(2*Math.PI*ph);for(let i=0;i<COLS*ROWS;i++){W[i]=.5+.45*pl;C[i]=.25*pl}
-  if(q<21){const Tp=3-2.4*(z/16.5),cyc=(z/Tp)%1,amp=.5+.5*(z/16.5);w=[0,1,2].map(i=>amp*Math.max(0,1-Math.abs(cyc*3-i-.5)*1.4))}else w=[1,1,1];
-  so=[0,1,2].map(()=>.2+.65*(z/18.5)*(.75+.25*pl))}
+  if(q<21){const Tp=3-2.4*(z/16.5),cyc=(z/Tp)%1,amp=.5+.5*(z/16.5);so=[0,1,2].map(i=>.12+amp*Math.max(0,1-Math.abs(cyc*3-i-.5)*1.4))}else so=[1,1,1]}
  else if(q<23.3){W.fill(1);so=[1,1,1];gl=1}
  else if(q<24.6){const e=(q-23.3)/1.3;for(let y=0;y<ROWS;y++){const v=cl(1-(e*14-(ROWS-1-y)));for(let x=0;x<COLS;x++)W[y*COLS+x]=v}so=[1,1,1].map(()=>1-.3*e);gl=Math.exp(-(q-23)*2.2)}
  else{const r=sm(24.6,30,q);chars(t,(.4+.45*br)*r,.55*r);w=base.map(v=>v*r);so=[0,1,2].map(i=>.7*(1-r)+respSom(i)*r);gl=Math.exp(-(q-23)*2.2)}
 }
-return {m,k,u,w,so,rec,gl,off,scr:(cueAt(RE,t)||RE[0])[2],n:count(t)};
+w=[WB,WB,WB];return {m,k,u,w,so,rec,gl,off,scr:(cueAt(RE,t)||RE[0])[2],n:count(t)};
 }
 /* drawing */
 const cv=$('tower'),c=cv.getContext('2d'),bd=$('bandc'),bx=bd.getContext('2d'),img=bx.createImageData(COLS,ROWS);
@@ -340,12 +338,12 @@ function drawTower(S){
  const narrow=w<520,gy=h-38,s=Math.min((gy-22)/16.6,(w-(narrow?30:230))/14.4),cx=narrow?w/2:Math.max(w*.42,6.8*s+40);
  const Y=m=>gy-m*s,ryK=.16;
  c.fillStyle='#0E0D0C';c.beginPath();c.ellipse(cx,gy,7.4*s,7.4*s*ryK,0,0,7);c.fill();
- const L=[30,150,270].map(a=>{const r=a*Math.PI/180;return{x:cx+5.5*s*Math.cos(r),y:gy+5.5*s*ryK*Math.sin(r),back:a===270,wash:a===30}});
+ const L=[30,150,270].map(a=>{const r=a*Math.PI/180;return{x:cx+5.5*s*Math.cos(r),y:gy+5.5*s*ryK*Math.sin(r),back:a===270,wash:true}});
  const WL=L[0],mast=Math.max(3,.17*s);
  c.save();c.globalCompositeOperation='lighter';
- [0,1,2].forEach(i=>{const v=S.w[i];if(v<.01)return;const y0=Y(i*5+.3),y1=Y(i*5+4.7),fx=WL.x+(i-1)*7,fy=WL.y-.95*s-6;const gr=c.createLinearGradient(fx,fy,cx,(y0+y1)/2);gr.addColorStop(0,'rgba(255,226,190,'+(.2*v)+')');gr.addColorStop(1,'rgba(255,226,190,'+(.04*v)+')');c.fillStyle=gr;c.beginPath();c.moveTo(fx-3,fy);c.lineTo(cx-mast*1.6,y1);c.lineTo(cx+mast*1.6,y0);c.lineTo(fx+3,fy);c.closePath();c.fill()});
+ L.forEach(l=>{const v=S.w[0]*(l.back?.6:1);if(v<.01)return;const fx=l.x,fy=l.y-.95*s-6;const gr=c.createLinearGradient(fx,fy,cx,Y(7.5));gr.addColorStop(0,'rgba(255,226,190,'+(.16*v)+')');gr.addColorStop(1,'rgba(255,226,190,'+(.025*v)+')');c.fillStyle=gr;c.beginPath();c.moveTo(fx-3,fy);c.lineTo(cx-mast*1.6,Y(.2));c.lineTo(cx+mast*1.6,Y(15.2));c.lineTo(fx+3,fy);c.closePath();c.fill()});
  c.restore();
- const lest=l=>{const bw=1.3*s,bh=.95*s;c.fillStyle=l.back?'#17161A':'#211F24';c.fillRect(l.x-bw/2,l.y-bh,bw,bh);c.fillStyle='#2E2B30';c.fillRect(l.x-bw/2,l.y-bh,bw,Math.max(2,bh*.1));if(l.wash){[0,1,2].forEach(i=>{const fx=l.x+(i-1)*7;c.fillStyle='#3A3539';c.beginPath();c.moveTo(fx-3,l.y-bh);c.lineTo(fx+3,l.y-bh);c.lineTo(fx+2,l.y-bh-7);c.lineTo(fx-2,l.y-bh-7);c.fill();const v=S.w[i];if(v>.02){c.fillStyle='rgba(255,226,190,'+(.3+.7*v)+')';c.fillRect(fx-2,l.y-bh-8,4,2)}})}};
+ const lest=l=>{const bw=1.3*s,bh=.95*s;c.fillStyle=l.back?'#17161A':'#211F24';c.fillRect(l.x-bw/2,l.y-bh,bw,bh);c.fillStyle='#2E2B30';c.fillRect(l.x-bw/2,l.y-bh,bw,Math.max(2,bh*.1));if(l.wash){[1].forEach(i=>{const fx=l.x;c.fillStyle='#3A3539';c.beginPath();c.moveTo(fx-3,l.y-bh);c.lineTo(fx+3,l.y-bh);c.lineTo(fx+2,l.y-bh-7);c.lineTo(fx-2,l.y-bh-7);c.fill();const v=S.w[i];if(v>.02){c.fillStyle='rgba(255,226,190,'+(.3+.7*v)+')';c.fillRect(fx-2,l.y-bh-8,4,2)}})}};
  const guy=l=>{c.strokeStyle=l.back?'#1A1A1E':'#2A282D';c.lineWidth=1;c.beginPath();c.moveTo(cx,Y(10));c.lineTo(l.x,l.y-.95*s);c.stroke()};
  L.filter(l=>l.back).forEach(l=>{guy(l);lest(l)});
  const hR=4.5,rx=3*s,ry=3*s*ryK*1.6,yc=Y(hR),bh=.5*s;
@@ -373,7 +371,7 @@ function drawTower(S){
  c.font='12px system-ui,-apple-system,sans-serif';c.textBaseline='middle';
  const sx=narrow?10:Math.max(10,cx-7*s-30);c.fillStyle='#5E646D';c.strokeStyle='#1C2027';[0,5,10,15].forEach(m=>{c.beginPath();c.moveTo(sx+26,Y(m));c.lineTo(sx+32,Y(m));c.stroke();c.textAlign='left';c.fillText(m+' m',sx,Y(m))});
  if(!narrow){const lx=cx+3.4*s+28;const lab=(txt,ty,ax,ay,on)=>{c.strokeStyle='#29272C';c.beginPath();c.moveTo(ax,ay);c.lineTo(lx-8,ty);c.stroke();c.fillStyle=on?'#F4F5F7':'#8B9099';c.textAlign='left';c.fillText(txt,lx,ty)};
-  lab('Globe, option',Y(15.6),cx+gr0+2,gyy,S.gl>.05);lab('Sommet, 3 diffuseurs',Y(13.7),cx+6,Y(13.7),Math.max(...S.so)>.4);lab('Mât, niveau haut',Y(11.2),cx+mast*1.5,Y(11.2),S.w[2]>.3);lab('Mât, niveau milieu',Y(7.5),cx+mast*1.5,Y(7.5),S.w[1]>.3);lab('Tore, matrice 10 px',Y(hR),cx+rx,yc,true);lab('Mât, niveau bas',Y(3.1),cx+mast*1.5,Y(3.1),S.w[0]>.3);lab('Écran et téléphone',Y(1.7),ex+sq+.2*s,sy+sq/2,S.off||sc==='E02');lab('3 washs sur un lest',Y(.2),WL.x+.65*s,WL.y-.6*s,Math.max(...S.w)>.3)}
+  lab('Globe, option',Y(15.6),cx+gr0+2,gyy,S.gl>.05);lab('Sommet, 3 diffuseurs',Y(13.7),cx+6,Y(13.7),Math.max(...S.so)>.4);lab('Mât éclairé par les washs',Y(9),cx+mast*1.5,Y(9),true);lab('Tore, matrice 10 px',Y(hR),cx+rx,yc,true);lab('Écran et téléphone',Y(1.7),ex+sq+.2*s,sy+sq/2,S.off||sc==='E02');lab('3 lests, un wash chacun',Y(.2),WL.x+.65*s,WL.y-.6*s,false)}
 }
 function drawBand(){const d=img.data;for(let i=0;i<COLS*ROWS;i++){const p=pix(i);d[i*4]=p[0];d[i*4+1]=p[1];d[i*4+2]=p[2];d[i*4+3]=255}bx.putImageData(img,0,0)}
 function screenHTML(S,t){const id=S.scr;
@@ -386,7 +384,7 @@ function screenHTML(S,t){const id=S.scr;
 /* timeline */
 const pct=t=>(t/T*100)+'%';
 function lane(id,R,cls,filter){$(id).innerHTML=R.filter(r=>!filter||filter(r[2])).map(r=>{const mic=r[2]==='MIC';return '<div class="bk '+cls+(mic?' mic':'')+'" data-t="'+r[0]+'" data-w="'+(r[1]-r[0])+'" style="left:calc('+pct(r[0])+' + 1px);width:calc('+pct(r[1]-r[0])+' - 2px)" title="'+esc(fmt0(r[0])+' à '+fmt0(r[1])+(mic?', micro ouvert':', '+r[2]))+'">'+(mic?'':esc(r[2]))+'</div>'}).join('')}
-lane('t_to',RL,'l',ZONE.to);lane('t_wa',RL,'l',ZONE.wa);lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_rf',RR,'s opt');lane('t_ec',RE,'e');
+lane('t_to',RL,'l',ZONE.to);$('t_wa').innerHTML='<div class="bk l" data-t="0" data-w="220" style="left:1px;width:calc(100% - 2px);opacity:.55" title="Washs fixes, toute la tour">fixes, toute la tour</div>';lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_rf',RR,'s opt');lane('t_ec',RE,'e');
 $('t_st').innerHTML=MOM.map(m=>'<div class="bk st" data-t="'+m[0]+'" data-w="'+(m[1]-m[0])+'" style="left:'+pct(m[0])+';width:'+pct(m[1]-m[0])+'" title="'+esc(m[3])+'">'+esc(SHORT[m[2]])+'</div>').join('');
 $('ax').innerHTML=[0,30,60,90,120,150,180,210].map(t=>'<span style="left:'+pct(t)+'">'+fmt0(t)+'</span>').join('');
 function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw;b.classList.toggle('nar',px<(b.classList.contains('st')?44:28))})}

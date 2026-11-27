@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#07080A">
 <title>Partition de la tour</title>
 <style>
@@ -193,6 +193,34 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 .right .lg i{width:9px;height:9px}
 .dev{box-shadow:inset 0 1px 0 #22262D}
 @media(max-width:900px){.fig{height:clamp(420px,70vh,620px)}}
+
+/* mode clair : la tour et l'écran restent de nuit */
+:root[data-theme=light]{color-scheme:light;--bg:#FAFAF8;--s1:#F1F1EE;--line:#E2E3E5;--ink:#15171B;--mute:#4F555D;--dim:#80868E;--lum:#8A5A12;--son:#2D5592;--scr:#5A6068}
+:root[data-theme=light] h1,:root[data-theme=light] h2,:root[data-theme=light] .brand,:root[data-theme=light] .now h3,:root[data-theme=light] .two h3,:root[data-theme=light] .sn,:root[data-theme=light] .cad b{color:#0F1114;text-shadow:none}
+:root[data-theme=light] .bar{background:rgba(250,250,248,.9)}
+:root[data-theme=light] .pb{background:#15171B;color:#FAFAF8}
+:root[data-theme=light] input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,#15171B var(--p,0%),#D6D8DB var(--p,0%))}
+:root[data-theme=light] input[type=range]::-moz-range-track{background:#D6D8DB}:root[data-theme=light] input[type=range]::-moz-range-progress{background:#15171B}
+:root[data-theme=light] input[type=range]::-webkit-slider-thumb{background:#15171B;box-shadow:0 0 0 4px rgba(21,23,27,.1)}:root[data-theme=light] input[type=range]::-moz-range-thumb{background:#15171B}
+:root[data-theme=light] .seg button.on{background:#E9EAEC}
+:root[data-theme=light] button:focus-visible,:root[data-theme=light] input:focus-visible,:root[data-theme=light] summary:focus-visible{outline-color:#15171B}
+:root[data-theme=light] .fig{background:#07080A;border-radius:6px;overflow:hidden}
+:root[data-theme=light] .gauge i{background:#E2E3E5}:root[data-theme=light] .gauge i.f{background:#C9872A;box-shadow:none}
+:root[data-theme=light] .dev{box-shadow:0 10px 30px rgba(0,0,0,.18)}
+:root[data-theme=light] .right .g{border-top-color:#ECEDEF}
+:root[data-theme=light] .bk.l{background:rgba(201,135,42,.17);color:#6E470E}
+:root[data-theme=light] .bk.s{background:rgba(45,85,146,.13);color:#24477E}
+:root[data-theme=light] .bk.e{background:rgba(0,0,0,.06);color:#4A4F57}
+:root[data-theme=light] .bk.mic{background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(45,85,146,.18) 4px 5px)}
+:root[data-theme=light] .bk.opt{box-shadow:inset 0 0 0 1px rgba(45,85,146,.45);color:#24477E}
+:root[data-theme=light] .bk.st{border-left-color:#D6D8DB;color:var(--dim)}:root[data-theme=light] .bk.st.on{color:#0F1114;border-left-color:#0F1114;background:rgba(0,0,0,.04)}
+:root[data-theme=light] #ph{background:#15171B}
+:root[data-theme=light] .body p,:root[data-theme=light] .ft td{color:#30343A}:root[data-theme=light] .ft tr.h:hover td{color:#0F1114}
+:root[data-theme=light] .chip.l{color:#6E470E;box-shadow:inset 0 0 0 1px rgba(138,90,18,.45)}:root[data-theme=light] .chip.s{color:#24477E;box-shadow:inset 0 0 0 1px rgba(45,85,146,.45)}:root[data-theme=light] .chip.e{color:#4A4F57;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+:root[data-theme=light] .go:hover{border-color:#15171B}
+:root[data-theme=light] .right .lg{color:var(--mute)}
+:root{--sw-l:rgba(255,236,205,.5);--sw-s:rgba(157,180,214,.6);--sw-e:rgba(139,144,153,.5)}
+:root[data-theme=light]{--sw-l:rgba(201,135,42,.5);--sw-s:rgba(45,85,146,.45);--sw-e:rgba(0,0,0,.25)}
 </style>
 </head>
 <body>
@@ -203,6 +231,7 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <input id="scrub" type="range" min="0" max="220" step="0.1" value="0" aria-label="Position dans la séquence">
 <div class="seg" id="speed" role="group" aria-label="Vitesse"><button type="button" class="on" data-v="1">×1</button><button type="button" data-v="2">×2</button><button type="button" data-v="4">×4</button></div>
 <button class="tog" id="snd" type="button" aria-pressed="true" aria-label="Sons de travail"><svg viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 010 5" stroke="currentColor" fill="none" stroke-width="1.4"/></svg>Son</button>
+<button class="tog" id="thm" type="button" aria-label="Passer en mode clair"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9L13 13M3 13l1.1-1.1M11.9 4.1L13 3"/></g></svg><span>Clair</span></button>
 </div></div>
 
 
@@ -241,7 +270,7 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <div class="r"><div class="k">Écran</div><div class="tr" id="t_ec"></div></div>
 <div id="ph"></div>
 </div>
-<div class="lg"><span><i style="background:rgba(255,244,226,.5)"></i>Séquence lumière, Structurals</span><span><i style="background:rgba(157,180,214,.6)"></i>Fichier audio, DTS</span><span><i style="background:repeating-linear-gradient(90deg,rgba(157,180,214,.5) 0 4px,transparent 4px 6px)"></i>Renfort de la sonnerie, si le poste ne s'entend pas assez</span><span><i style="background:rgba(139,144,153,.5)"></i>Écran</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(157,180,214,.5) 3px 5px)"></i>Micro ouvert, enceintes silencieuses</span></div>
+<div class="lg"><span><i style="background:var(--sw-l)"></i>Séquence lumière, Structurals</span><span><i style="background:var(--sw-s)"></i>Fichier audio, DTS</span><span><i style="background:repeating-linear-gradient(90deg,var(--sw-s) 0 4px,transparent 4px 6px)"></i>Renfort de la sonnerie, si le poste ne s'entend pas assez</span><span><i style="background:var(--sw-e)"></i>Écran</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,var(--sw-s) 3px 5px)"></i>Micro ouvert, enceintes silencieuses</span></div>
 </div>
 </div>
 </div></header>
@@ -505,6 +534,12 @@ tl.addEventListener('pointermove',e=>{if(drag)seek(tlx(e))});
 tl.addEventListener('pointerup',()=>{drag=false});tl.addEventListener('pointercancel',()=>{drag=false});
 document.addEventListener('keydown',e=>{const tg=e.target.tagName;if(tg==='INPUT'||tg==='SUMMARY'||tg==='BUTTON'||e.target.closest('#ft'))return;if(e.code==='Space'){e.preventDefault();setPlay(!playing)}else if(e.key==='ArrowRight')seek(t+1);else if(e.key==='ArrowLeft')seek(t-1)});
 const ro=new ResizeObserver(()=>{size();fitLabels();render()});ro.observe(cv);ro.observe(tl);
+
+const root=document.documentElement,thm=$('thm');
+const applyTheme=v=>{root.dataset.theme=v;thm.querySelector('span').textContent=v==='dark'?'Clair':'Sombre';thm.setAttribute('aria-label',v==='dark'?'Passer en mode clair':'Passer en mode sombre');try{localStorage.setItem('tdp-theme',v)}catch(e){}};
+let th0='dark';try{th0=localStorage.getItem('tdp-theme')||root.dataset.theme||'dark'}catch(e){th0=root.dataset.theme||'dark'}
+applyTheme(th0==='light'?'light':'dark');
+thm.addEventListener('click',()=>applyTheme(root.dataset.theme==='light'?'dark':'light'));
 size();fitLabels();seek(86);
 }
 </script>

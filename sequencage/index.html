@@ -221,6 +221,7 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 :root[data-theme=light] .right .lg{color:var(--mute)}
 :root{--sw-l:rgba(255,236,205,.5);--sw-s:rgba(157,180,214,.6);--sw-e:rgba(139,144,153,.5)}
 :root[data-theme=light]{--sw-l:rgba(201,135,42,.5);--sw-s:rgba(45,85,146,.45);--sw-e:rgba(0,0,0,.25)}
+.ft tr.d td{line-height:1.6;padding-bottom:18px}.ft tr.d td:last-child{max-width:78ch}
 </style>
 </head>
 <body>
@@ -338,26 +339,26 @@ const STATES=[
 ['Envoi','La tour réagit au vœu.','10 s, à chaque vœu',82,'Le visiteur raccroche et la tour réagit aussitôt : une cause, un effet. La séquence est la même pour tous les visiteurs et doit avoir une très belle intensité.','Le plasma pulse et se rassemble dans le tore, un éclair le traverse, puis l\'énergie rejoint le sommet : les trois diffuseurs s\'allument du bas vers le haut et s\'illuminent ensemble. La tour revient ensuite directement à sa respiration.','Une montée électrique, analogique, qui se résout dans un impact. Pas de silence après le vœu.',['A08','L07','E05']],
 ['Émission','Tous les dix vœux.','30 s',172,'Le dixième vœu déclenche une séquence spéciale, plus longue et plus intense. Elle ajoute de la surprise et rythme la soirée.','L\'anneau se remplit de lumière et pulse de plus en plus vite ; les diffuseurs du sommet s\'allument du bas vers le haut, en vagues de plus en plus rapides. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate, le globe lance son flash. La tour revient à sa respiration.','Composition immersive en crescendo, point culminant au tir. Plusieurs variantes alternent d\'une émission à l\'autre.',['A09','L09','E05']]];
 const FILES=[
-['A01','Nappe de respiration','enceintes','boucle','Le souffle de la tour, analogique, qui tourne en fond sauf pendant l\'enregistrement du vœu.'],
-['A02','Sonnerie','poste ; enceintes en renfort','10 s','Une vraie sonnerie de téléphone, mécanique. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez.'],
-['A03','Tonalité occupée','combiné','jusqu\'au raccroché','Pour qui décroche sans sonnerie, avec les vrais codes sonores de la téléphonie.'],
-['A04','Voix d\'accueil','combiné','à mesurer','« Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis la consigne de raccrocher.'],
-['A05','Bip','combiné','< 1 s','Donne la parole au visiteur.'],
-['A07','Fin à 60 s','combiné','court','Invite à raccrocher quand la minute est écoulée.'],
-['A08','Envoi','enceintes','10 s','Une montée électrique, analogique, qui se résout dans un impact ; la même pour chaque vœu.'],
-['A09','Émission, variantes','enceintes','30 s','Crescendo immersif, point culminant au tir ; plusieurs variantes en alternance.'],
-['L02','Respiration','tore, sommet','boucle','Respiration lente, battement ponctuel, caractères cryptiques en teintes chaudes ; washs fixes sur toute la tour.'],
-['L03','Appel','tore, sommet, globe','10 s','Toute la tour bat avec la sonnerie, deux coups et un silence.'],
-['L04','Frémissement','tore','court','À peine perceptible, pour qui décroche hors appel.'],
-['L05','Accueil','tore, sommet','durée de A04','Tore enveloppant ; diffuseurs du sommet allumés en séquence, comme une information qui arrive.'],
-['L06','Enregistrement','tore, sommet','0 à 60 s','Une boucle coupée au raccroché, pour s\'adapter à la durée de chaque vœu ; les trois diffuseurs en rouge, voyant REC.'],
-['L07','Envoi','tore, sommet','10 s','Plasma qui se rassemble, éclair, puis les diffuseurs du sommet allumés du bas vers le haut ; la même séquence pour chaque vœu.'],
-['L09','Émission, variantes','tore, sommet, globe','30 s','Anneau qui se remplit et pulse, diffuseurs du sommet en vagues montantes de plus en plus rapides, tir : coupure nette, éclat du sommet, flash du globe.'],
-['E01','Maxime','écran','respiration','« Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun », en français et en anglais.'],
-['E02','Alerte d\'appel','écran','appel','Écran rouge, invitation à décrocher.'],
-['E03','Traduction et consignes','écran','voix','Traduction anglaise de la voix ; parler après le bip, raccrocher pour envoyer.'],
-['E04','REC','écran','vœu','Voyant REC et temps écoulé ; compte à rebours sur les 10 dernières secondes.'],
-['E05','Numéro du vœu','écran','envoi, émission','Le numéro du vœu et la maxime.']];
+['A01','Nappe de respiration','enceintes','boucle','Le souffle de la tour au repos, celui d\'un organisme endormi au cœur d\'une machine. Une nappe analogique, chaude et un peu granuleuse, avec un battement lent calé sur la respiration lumineuse du tore. Elle reste assez discrète pour qu\'on la découvre en s\'approchant, et tourne en fond à tout moment, sauf pendant l\'enregistrement du vœu.'],
+['A02','Sonnerie','poste ; enceintes en renfort','10 s','Le moment où la tour convoque quelqu\'un. Une vraie sonnerie de téléphone, mécanique, avec la cloche et le rythme d\'un vieux poste : chacun doit comprendre immédiatement qu\'un téléphone sonne et qu\'il peut décrocher. Elle sort du poste lui-même, ce qui donne à l\'objet sa crédibilité ; les enceintes ne la renforcent que si le poste ne s\'entend pas assez.'],
+['A03','Tonalité occupée','combiné','jusqu\'au raccroché','La tour répond à qui décroche trop tôt par le signal que tout le monde connaît : la ligne est occupée. Un vrai code sonore de la téléphonie, sans habillage, qui fait patienter avec un peu d\'humour avant le rappel.'],
+['A04','Voix d\'accueil','combiné','à mesurer','La voix de la tour, à l\'oreille du visiteur : « Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis la consigne de raccrocher pour envoyer le vœu. Une voix calme et proche, qui tutoie. Elle doit installer en quelques secondes un moment d\'intimité au milieu du jardin.'],
+['A05','Bip','combiné','< 1 s','Le signal qui donne la parole, comme sur un vieux répondeur. Bref et familier.'],
+['A07','Fin à 60 s','combiné','court','Quand la minute est écoulée, la tour invite doucement à raccrocher, pour que personne ne se sente coupé.'],
+['A08','Envoi','enceintes','10 s','La récompense sonore de chaque vœu. Un bourdonnement électrique qui pulse, enfle et accélère comme un plasma qui se charge, jusqu\'à la décharge au moment de l\'éclair, puis s\'éteint pendant que la lumière monte au sommet. Un son analogique, presque mécanique, le même pour tous, pour que chacun associe son geste à cette réponse.'],
+['A09','Émission, variantes','enceintes','30 s','La séquence spéciale du dixième vœu, et le moment collectif de la soirée. Une composition immersive en crescendo, plus ample et plus longue que l\'envoi, qui culmine au moment du tir vers le ciel. Plusieurs variantes alternent, pour qu\'un public qui reste un moment ne réentende pas la même chose.'],
+['L02','Respiration','tore, sommet','boucle','La tour au repos : un être vivant dans une structure de télécommunication. Le tore respire lentement, traversé par un battement de cœur ponctuel. Des caractères de toutes les écritures du monde y circulent et surgissent, cryptiques, en teintes chaudes rétro-tech ; ils figurent les messages qui transitent par la tour sans jamais les écrire. Le sommet respire en léger décalage. C\'est ce que verront la plupart des passants : la séquence doit tenir seule le spectacle et varier assez pour ne jamais paraître en boucle.'],
+['L03','Appel','tore, sommet, globe','10 s','La tour cherche quelqu\'un. La respiration se brise d\'un coup et toute la tour bat au rythme de la sonnerie, deux coups et un silence, comme un vieux téléphone porté à l\'échelle d\'un phare. Le globe, s\'il est installé, clignote comme une balise. L\'appel doit se voir de loin et donner envie de s\'approcher.'],
+['L04','Frémissement','tore','court','Un signe presque imperceptible quand quelqu\'un décroche hors appel : la tour a entendu. Toute la surprise est réservée au rappel.'],
+['L05','Accueil','tore, sommet','durée de A04','La tour se tourne vers une seule personne. L\'agitation de l\'appel retombe d\'un coup ; le tore devient enveloppant, avec un mouvement lent et contenu, et les trois diffuseurs du sommet s\'allument l\'un après l\'autre, comme une information qui arrive.'],
+['L06','Enregistrement','tore, sommet','0 à 60 s','Le moment le plus intime, dans l\'esthétique de l\'enregistrement : les trois diffuseurs du sommet passent au rouge, comme le voyant REC d\'une caméra, visible de loin. Sur le tore, une boucle d\'ondes montre au public qu\'un vœu est en train d\'être dit, sans jamais l\'écrire. La boucle s\'adapte à la durée de chaque vœu et se coupe au raccroché.'],
+['L07','Envoi','tore, sommet','10 s','La réponse immédiate de la tour au raccroché : une cause, un effet. Le plasma pulse et se rassemble dans le tore, un éclair le traverse, puis les trois diffuseurs du sommet s\'allument du bas vers le haut, comme si le vœu montait. Une séquence courte et intense, la même pour tous les visiteurs, qui doit donner envie de revenir faire un vœu.'],
+['L09','Émission, variantes','tore, sommet, globe','30 s','Le grand moment de la soirée, tous les dix vœux. L\'anneau se remplit de lumière et pulse de plus en plus vite, les diffuseurs du sommet s\'allument en vagues montantes qui accélèrent, la tension monte. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate et le globe lance son flash, comme un signal envoyé au loin. La tour retrouve ensuite son souffle. Plusieurs variantes alternent d\'une émission à l\'autre.'],
+['E01','Maxime','écran','respiration','Au repos, l\'écran porte la maxime de la tour, en français et en anglais : « Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun. » Une invitation à penser son vœu avant même de décrocher.'],
+['E02','Alerte d\'appel','écran','appel','L\'écran relaie l\'appel : il passe au rouge et invite à décrocher, pour que personne ne doute que ce téléphone sonne pour lui.'],
+['E03','Traduction et consignes','écran','voix','Pendant la voix, l\'écran donne la traduction anglaise et les consignes pratiques : parler après le bip, raccrocher pour envoyer. La voix peut ainsi rester un moment rituel, en français, sans mode d\'emploi.'],
+['E04','REC','écran','vœu','Le voyant REC et un anneau qui marque le temps écoulé. Sur les 10 dernières secondes, un compte à rebours permet à chacun de terminer sa phrase sans être coupé net.'],
+['E05','Numéro du vœu','écran','envoi, émission','Le numéro du vœu et la maxime : une trace discrète, le temps de l\'envoi.']];
 const MAX1='Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun.',MAX1E='A personal wish often grows stronger when it serves the common good.';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

@@ -144,6 +144,28 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 @media(max-width:900px){.stage{grid-template-columns:minmax(0,1fr)}.fig{height:clamp(440px,70vh,640px)}.two{grid-template-columns:minmax(0,1fr)}.body{grid-template-columns:minmax(0,1fr)}.body>div:first-child{display:none}.body .fx{grid-column:auto}}
 @media(max-width:600px){.fig{height:clamp(380px,112vw,520px)}.tl{--lw:74px}.r .k{font-size:12px}.brand{display:none}.bar .w{gap:10px}details.st2 summary{grid-template-columns:28px minmax(0,1fr) 24px}.du{display:none}.ft td:nth-child(3),.ft th:nth-child(3){display:none}}
 @media(prefers-reduced-motion:reduce){.pl::before,.pl::after,.scr{transition:none}}
+
+/* layout tour 1/3, lecture 2/3 */
+.hero{padding:clamp(18px,2.4vw,30px) 0 clamp(24px,3vw,40px)}
+.hero h1{font-size:clamp(24px,2.6vw,34px)}
+.hero .lead{margin-top:8px;font-size:15px;max-width:none}
+.stage{grid-template-columns:minmax(0,1fr) minmax(0,2fr);margin-top:18px;gap:clamp(20px,2.6vw,40px)}
+.fig{height:clamp(420px,calc(100svh - 230px),780px)}
+.top{display:grid;grid-template-columns:minmax(0,1fr) 196px;gap:24px;align-items:start}
+.now h3{font-size:clamp(20px,1.9vw,26px);margin:4px 0 8px}
+.now p{min-height:0;font-size:14px}
+.gauge{margin:14px 0 6px}
+.dev{margin-top:0;width:196px;padding:9px;border-radius:12px}
+.scr{padding:8%;gap:6px}
+.scr .fr{font-size:12px}.scr .en{font-size:11px}.scr .bg{font-size:24px}
+.scr .recl{font-size:13px}.scr .cd{font-size:30px}
+.dev .sub{margin-top:6px;font-size:11px}
+.right .tl{margin-top:18px}
+.right .lg{font-size:12px;margin-top:10px}
+@media(max-width:900px){.stage{grid-template-columns:minmax(0,1fr)}.fig{height:clamp(420px,70vh,620px)}}
+@media(max-width:560px){.top{grid-template-columns:minmax(0,1fr)}.dev{width:min(100%,260px)}}
+.right .r{min-height:24px}.right .tr{height:22px}.right .bk{line-height:16px;font-size:10.5px;letter-spacing:-.01em}.right .g{margin-top:6px;padding-top:6px}.right .g .k{font-size:11px}.right .ax{height:16px}#ph{top:16px}
+.top{grid-template-columns:minmax(0,1fr) 164px}.dev{width:164px}.scr .bg{font-size:20px}.scr .fr{font-size:11px}.scr .en{font-size:10.5px}
 </style>
 </head>
 <body>
@@ -159,26 +181,23 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 
 <header class="hero"><div class="w">
 <h1>Partition son et lumière</h1>
-<p class="lead">La tour appelle, écoute un vœu et le renvoie aussitôt en lumière ; tous les dix vœux, l'envoi devient une séquence spéciale. Lancez la lecture ou déplacez-vous dans une séquence d'exemple de 3 min 40.</p>
+<p class="lead">Séquence d'exemple de 3 min 40. Codes : L lumière, A audio, E écran.</p>
 <div class="stage">
 <div>
 <div class="fig"><canvas id="tower" role="img" aria-label="La tour en élévation, ses zones lumineuses à l'instant choisi"></canvas></div>
 <div class="band"><canvas id="bandc" width="377" height="10"></canvas><div class="sub"><span>Bandeau du tore déroulé, 377 × 10 pixels</span></div></div>
 </div>
-<aside class="now" aria-live="polite">
+<div class="right">
+<div class="top">
+<div class="now" aria-live="polite">
 <div class="t" id="nt"></div>
 <h3 id="nn"></h3>
 <p id="np"></p>
 <div class="gauge" id="gauge"></div>
 <div class="sub" id="gt"></div>
-<div class="dev"><div class="scr" id="scr"></div><div class="sub">Écran au-dessus du combiné</div></div>
-</aside>
 </div>
-</div></header>
-
-<section id="timeline"><div class="w">
-<h2>Timeline</h2>
-<p class="lead">Chaque bloc porte le code d'une séquence lumière (L), d'un fichier audio (A) ou d'un contenu d'écran (E). Cliquez sur la timeline pour vous y placer.</p>
+<div class="dev"><div class="scr" id="scr"></div><div class="sub">Écran au-dessus du combiné</div></div>
+</div>
 <div class="tl" id="tl">
 <div class="r"><div></div><div class="ax" id="ax"></div></div>
 <div class="r"><div class="k">États</div><div class="tr" id="t_st"></div></div>
@@ -196,7 +215,10 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <div id="ph"></div>
 </div>
 <div class="lg"><span><i style="background:rgba(255,244,226,.5)"></i>Séquence lumière, Structurals</span><span><i style="background:rgba(157,180,214,.6)"></i>Fichier audio, DTS</span><span><i style="background:repeating-linear-gradient(90deg,rgba(157,180,214,.5) 0 4px,transparent 4px 6px)"></i>Renfort de la sonnerie, si le poste ne s'entend pas assez</span><span><i style="background:rgba(139,144,153,.5)"></i>Écran</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(157,180,214,.5) 3px 5px)"></i>Micro ouvert, enceintes silencieuses</span></div>
-</div></section>
+</div>
+</div>
+</div></header>
+
 
 <section id="principe"><div class="w">
 <h2>Le principe</h2>
@@ -387,7 +409,7 @@ function lane(id,R,cls,filter){$(id).innerHTML=R.filter(r=>!filter||filter(r[2])
 lane('t_to',RL,'l',ZONE.to);$('t_wa').innerHTML='<div class="bk l" data-t="0" data-w="220" style="left:1px;width:calc(100% - 2px);opacity:.55" title="Washs fixes, toute la tour">fixes, toute la tour</div>';lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_rf',RR,'s opt');lane('t_ec',RE,'e');
 $('t_st').innerHTML=MOM.map(m=>'<div class="bk st" data-t="'+m[0]+'" data-w="'+(m[1]-m[0])+'" style="left:'+pct(m[0])+';width:'+pct(m[1]-m[0])+'" title="'+esc(m[3])+'">'+esc(SHORT[m[2]])+'</div>').join('');
 $('ax').innerHTML=[0,30,60,90,120,150,180,210].map(t=>'<span style="left:'+pct(t)+'">'+fmt0(t)+'</span>').join('');
-function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw;b.classList.toggle('nar',px<(b.classList.contains('st')?44:28))})}
+function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw;b.classList.toggle('nar',px<(b.classList.contains('st')?44:22))})}
 /* states and files */
 const chip=code=>'<span class="chip '+(code[0]==='L'?'l':code[0]==='A'?'s':'e')+'">'+code+'</span>';
 $('states').innerHTML=STATES.map((s,i)=>'<details class="st2"'+(i===0?' open':'')+'><summary><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="sn">'+esc(s[0])+'<span>'+esc(s[1])+'</span></span><span class="du">'+esc(s[2])+'</span><span class="pl"></span></summary><div class="body"><div></div><div><h4>Ce que vit le visiteur</h4><p>'+esc(s[4])+'</p></div><div><h4>Lumière</h4><p>'+esc(s[5])+'</p></div><div><h4>Son et écran</h4><p>'+esc(s[6])+'</p></div><div class="fx">'+s[7].map(chip).join('')+'<button class="go" type="button" data-t="'+s[3]+'">Voir dans la séquence</button></div></div></details>').join('');
@@ -409,7 +431,7 @@ function initAudio(){if(AC)return;try{AC=new (window.AudioContext||window.webkit
  const lfo=osc('square',24),lg=AC.createGain();lg.gain.value=.5;lfo.connect(lg);lg.connect(tr.gain);const off=AC.createConstantSource?AC.createConstantSource():null;if(off){off.offset.value=.5;off.connect(tr.gain);off.start()}
  N.ring=vo(tr,'bandpass',1500,1.2);
  N.busy=vo(osc('sine',425));
- N.ro=osc('sawtooth',70);N.rise=vo(N.ro,'lowpass',1300);
+ N.ro=osc('sawtooth',55);N.ro2=osc('square',110.6);const bzm=AC.createGain();bzm.gain.value=.5;N.ro2.connect(bzm);const bzs=AC.createGain();N.ro.connect(bzs);bzm.connect(bzs);N.rise=vo(bzs,'lowpass',900,3);
  N.ch=[110,165,220,330].map(f=>vo(osc('triangle',f)));
  N.out=out;N.nb=nb;
 }
@@ -424,7 +446,7 @@ function audio(t,S,on){if(!AC)return;const now=AC.currentTime,set=(gg,v)=>gg.gai
  set(N.breath,enc==='A01'?(k==='voix'||k==='appel'?.05:.08)+.14*breath(t):0);
  set(N.ring,rc&&rc[2]==='A02'?.07*ring(u):0);
  set(N.busy,rc&&rc[2]==='A03'?(u%1<.5?.06:0):0);
- if(k==='envoi'){set(N.rise,u<3.3?.04+.05*u/3:0);N.ro.frequency.setTargetAtTime(70*Math.pow(10,cl(u/3.3)),now,.05)}else set(N.rise,0);
+ if(k==='envoi'){const pl=.5+.5*Math.sin(2*Math.PI*(2+u*2.4)*u),v=u<3.35?(.03+.08*u/3.35)*(.35+.65*pl):.11*Math.exp(-(u-3.35)*.75)*(.6+.4*Math.sin(2*Math.PI*7*u));set(N.rise,v);const f=55+18*cl(u/3.35);N.ro.frequency.setTargetAtTime(f,now,.08);N.ro2.frequency.setTargetAtTime(f*2.01,now,.08)}else set(N.rise,0);
  N.ch.forEach((gg,i)=>set(gg,k==='emis'&&u<23?(.02+.05*cl((u-1)/22))*(i<3?1:cl((u-12)/10)):k==='emis'&&u<30?.05*Math.exp(-(u-23)*.6)*(i===0?1:.5):0));
 }
 /* state + loop */
@@ -438,7 +460,7 @@ function render(){const S=model(t);drawBand();drawTower(S);
  ph.style.left='calc(var(--lw) + (100% - var(--lw)) * '+(t/T)+')';
  document.querySelectorAll('.bk.st').forEach(b=>b.classList.toggle('on',+b.dataset.t===S.m[0]));
  audio(t,S,playing&&sound);
- if(playing&&sound){[[56,'bip'],[111,'bip'],[85,'imp'],[195,'tir']].forEach(([x,kd])=>{if(prevT<x&&t>=x)shot(kd)});if(sp===1&&[48,103].some(x=>prevT<x&&t>=x))speak()}
+ if(playing&&sound){[[56,'bip'],[111,'bip'],[195,'tir']].forEach(([x,kd])=>{if(prevT<x&&t>=x)shot(kd)});if(sp===1&&[48,103].some(x=>prevT<x&&t>=x))speak()}
  prevT=t;
 }
 function loop(ts){if(!playing)return;const dt=Math.min(.1,(ts-last)/1000)*sp;last=ts;t+=dt;if(t>=T){t=T-.05;setPlay(false);return}render();requestAnimationFrame(loop)}

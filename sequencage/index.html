@@ -11,7 +11,7 @@
 /* VOICE travail : la conduite son et lumière d'une installation, à transmettre à l'équipe technique
    IDEA une conduite de régie lue la nuit, au pied de la tour, dans la charte du site tourdespossibles.ch
    PICTURE la tour en élévation, ses zones allumées à l'instant t, et le bandeau du tore déroulé
-   COLOUR nuit #07080A, blanc chaud #FFF4E2 pour la lumière, bleu gris #9DB4D6 pour le son, rouge REC
+   COLOUR nuit #07080A, blanc chaud et ambre rétro-tech pour la lumière, bleu gris #9DB4D6 pour le son, rouge REC
    TYPE la police système du site, titres en 700 avec la lueur du site
    LAYOUT transport collant ; tour et écran ; timeline ; puis le cahier des charges replié en accordéons */
 :root{color-scheme:dark;--bg:#07080A;--s1:#0D0F13;--line:#1C2027;--ink:#F4F5F7;--mute:#8B9099;--dim:#5E646D;--lum:#FFF4E2;--son:#9DB4D6;--scr:#8B9099;--rec:#FF3B3B}
@@ -84,6 +84,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid
 .bk.l{background:rgba(255,244,226,.12);box-shadow:inset 0 0 0 1px rgba(255,244,226,.45);color:var(--lum)}
 .bk.s{background:rgba(157,180,214,.13);box-shadow:inset 0 0 0 1px rgba(157,180,214,.5);color:var(--son)}
 .bk.e{background:rgba(139,144,153,.12);box-shadow:inset 0 0 0 1px rgba(139,144,153,.42);color:#B9BEC6}
+.bk.opt{background:transparent;box-shadow:inset 0 0 0 1px rgba(157,180,214,.5);border:1px dashed rgba(157,180,214,.0);color:var(--son);background-image:repeating-linear-gradient(90deg,rgba(157,180,214,.18) 0 6px,transparent 6px 10px)}
 .bk.mic{background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(157,180,214,.22) 4px 6px);box-shadow:inset 0 0 0 1px rgba(157,180,214,.35)}
 .bk.st{background:transparent;color:var(--mute);text-align:left;padding-left:6px;border-left:1px solid #3A3F47;border-radius:0;font-size:12px}
 .bk.st.on{color:#FFFDF8;border-left-color:#FFFDF8}
@@ -155,13 +156,14 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <button class="tog" id="snd" type="button" aria-pressed="true" aria-label="Sons de travail"><svg viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 010 5" stroke="currentColor" fill="none" stroke-width="1.4"/></svg>Son</button>
 </div></div>
 
+
 <header class="hero"><div class="w">
 <h1>Partition son et lumière</h1>
-<p class="lead">La tour appelle, enregistre un vœu et se charge ; tous les dix vœux, elle libère sa charge vers le ciel. Lancez la lecture ou déplacez-vous dans une séquence d'exemple de 3 min 40.</p>
+<p class="lead">La tour appelle, écoute un vœu et le renvoie aussitôt en lumière ; tous les dix vœux, l'envoi devient une séquence spéciale. Lancez la lecture ou déplacez-vous dans une séquence d'exemple de 3 min 40.</p>
 <div class="stage">
 <div>
 <div class="fig"><canvas id="tower" role="img" aria-label="La tour en élévation, ses zones lumineuses à l'instant choisi"></canvas></div>
-<div class="band"><canvas id="bandc" width="377" height="10"></canvas><div class="sub"><span>Bandeau du tore déroulé, 377 × 10 pixels</span><span id="bi"></span></div></div>
+<div class="band"><canvas id="bandc" width="377" height="10"></canvas><div class="sub"><span>Bandeau du tore déroulé, 377 × 10 pixels</span></div></div>
 </div>
 <aside class="now" aria-live="polite">
 <div class="t" id="nt"></div>
@@ -188,31 +190,34 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <div class="g"><div class="k">Son</div><div></div></div>
 <div class="r"><div class="k">Combiné</div><div class="tr" id="t_co"></div></div>
 <div class="r"><div class="k">Enceintes</div><div class="tr" id="t_en"></div></div>
+<div class="r"><div class="k">Renfort</div><div class="tr" id="t_rf"></div></div>
 <div class="g"><div class="k">Écran</div><div></div></div>
 <div class="r"><div class="k">Écran</div><div class="tr" id="t_ec"></div></div>
 <div id="ph"></div>
 </div>
-<div class="lg"><span><i style="background:rgba(255,244,226,.5)"></i>Séquence lumière, Structurals</span><span><i style="background:rgba(157,180,214,.6)"></i>Fichier audio, DTS</span><span><i style="background:rgba(139,144,153,.5)"></i>Écran</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(157,180,214,.5) 3px 5px)"></i>Micro ouvert</span></div>
+<div class="lg"><span><i style="background:rgba(255,244,226,.5)"></i>Séquence lumière, Structurals</span><span><i style="background:rgba(157,180,214,.6)"></i>Fichier audio, DTS</span><span><i style="background:repeating-linear-gradient(90deg,rgba(157,180,214,.5) 0 4px,transparent 4px 6px)"></i>Renfort de la sonnerie, si le poste ne s'entend pas assez</span><span><i style="background:rgba(139,144,153,.5)"></i>Écran</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(157,180,214,.5) 3px 5px)"></i>Micro ouvert, enceintes silencieuses</span></div>
 </div></section>
 
 <section id="principe"><div class="w">
 <h2>Le principe</h2>
 <p class="lead">La tour a l'allure d'une tour de télécommunication et se comporte comme un être vivant : elle respire, son cœur bat, et c'est elle qui appelle le public.</p>
 <div class="two">
-<div><h3>Le chargement, vœux 1 à 9</h3><p>À chaque raccroché, l'énergie du vœu entre dans la tour. L'anneau du tore montre alors son état de charge : chaque vœu y devient un bloc de lumière blanche, un dixième du pourtour. L'énergie monte jusqu'au sommet et reste dans la tour. C'est la récompense du visiteur qui vient de parler.</p></div>
-<div><h3>L'élévation, au dixième vœu</h3><p>Le dixième vœu referme l'anneau. La tour libère d'un coup les dix vœux accumulés et les envoie vers le ciel par le sommet. C'est le moment partagé par tout le public présent, celui qui rythme la soirée.</p></div>
+<div><h3>L'envoi, à chaque vœu</h3><p>Le visiteur raccroche et la tour réagit aussitôt : une cause, un effet. La séquence d'envoi dure 10 s et reste la même pour tous les visiteurs. C'est leur récompense, elle doit avoir une très belle intensité.</p></div>
+<div><h3>L'émission, tous les dix vœux</h3><p>Le dixième vœu déclenche une séquence spéciale de 30 s, plus longue et plus intense, qui ajoute de la surprise et rythme la soirée.</p></div>
 </div>
 <ul class="rules">
-<li><b>Une séquence à la fois</b>Pendant un chargement ou une émission, la tour ne sonne pas et ignore tout décroché. Chaque vœu a sa propre séquence.</li>
-<li><b>Les vœux ne sont jamais écrits</b>Des caractères cryptiques de toutes les écritures du monde circulent sur l'anneau et figurent les messages stockés.</li>
-<li><b>La charge se montre aux moments clés</b>L'état de charge n'apparaît qu'au chargement et à l'émission ; le reste du temps, les caractères circulent librement.</li>
-<li><b>Une gamme resserrée</b>Blanc chaud pour la lumière de la tour, rouge pour l'enregistrement. Structurals compose librement dans cette gamme, sans effet bariolé.</li>
+<li><b>Une séquence à la fois</b>Pendant un envoi ou une émission, la tour ne sonne pas et ignore tout décroché. Chaque vœu a sa propre séquence.</li>
+<li><b>Le seul silence est l'enregistrement</b>Entre deux vœux, la tour respire et sa nappe sonore tourne. Les enceintes ne se taisent que pendant que le visiteur parle.</li>
+<li><b>Les vœux ne sont jamais écrits</b>Des caractères cryptiques de toutes les écritures du monde circulent sur l'anneau.</li>
+<li><b>Des teintes chaudes, rétro-tech</b>Couleurs libres pour Structurals, expressives, nettes et graphiques, sans effet bariolé. Le rouge marque l'enregistrement.</li>
+<li><b>Des sons analogiques</b>Les vrais codes de la téléphonie, sonnerie et tonalité occupée, et des sons old school, analogiques voire mécaniques.</li>
+<li><b>Trois washs sur un même lest</b>Un projecteur par niveau, depuis un même point de vue, pour garder la montée de la lumière le long du mât. Proposition à confirmer avec Structurals.</li>
 </ul>
 </div></section>
 
 <section id="etats"><div class="w">
 <h2>Les états de la tour</h2>
-<p class="lead">Huit états, un seul actif à la fois. Ouvrez un état pour lire son intention, ou placez la lecture sur son exemple.</p>
+<p class="lead">Six états, un seul actif à la fois. Ouvrez un état pour lire son intention, ou placez la lecture sur son exemple.</p>
 <div id="states" style="margin-top:28px"></div>
 </div></section>
 
@@ -226,64 +231,55 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 <p class="lead">La tour appelle souvent quand le jardin est plein et s'espace quand personne ne répond, ce qui épargne le voisinage. Quand il y a la file, c'est le public qui donne le tempo.</p>
 <div class="cad">
 <div><b>10 s</b><span>de sonnerie par appel</span></div>
-<div><b>15 s</b><span>de silence après un vœu</span></div>
-<div><b>+5 s</b><span>de silence par appel sans réponse</span></div>
+<div><b>15 s</b><span>de respiration après un envoi, avant le prochain appel</span></div>
+<div><b>+5 s</b><span>d'attente par appel sans réponse</span></div>
 <div><b>2 min</b><span>entre deux appels au plus lent, atteint après 24 min sans réponse</span></div>
 <div><b>2 s</b><span>entre un raccroché hors appel et la sonnerie</span></div>
 </div>
-<p class="lead" style="font-size:15px">La tour s'éveille vers 17:00 et s'endort à 22:00 ; une séquence en cours à 22:00 va jusqu'à son terme.</p>
+<p class="lead" style="font-size:15px">Pas de séquence d'allumage ni d'extinction : la tour respire dès l'ouverture du festival et s'arrête à 22:00.</p>
 </div></section>
-
-
-<footer><div class="w">La Tour des Possibles, Geneva Lux 2027. Un projet de l'association Magnetic. Partition de travail du 26 novembre 2026 ; sons de travail générés dans la page, en attente des compositions de DTS.</div></footer>
+<footer><div class="w">La Tour des Possibles, Geneva Lux 2027. Un projet de l'association Magnetic. Partition de travail du 27 novembre 2026 ; sons de travail générés dans la page, en attente des compositions de DTS.</div></footer>
 
 <script>
 {
-const T=220,COLS=377,ROWS=10,SEG=COLS/10;
-const MOM=[[0,15,'resp','Respiration'],[15,25,'appel','Appel sans réponse'],[25,45,'resp','Respiration'],[45,48,'appel','Appel'],[48,56,'voix','Transmission, voix'],[56,57,'bip','Bip'],[57,82,'rec','Transmission, vœu n° 9'],[82,92,'charge','Chargement'],[92,96,'apais','Apaisement'],[96,99,'hors','Décroché hors appel'],[99,101,'apais','Apaisement'],[101,103,'appel','Appel'],[103,111,'voix','Transmission, voix'],[111,112,'bip','Bip'],[112,172,'rec','Transmission, vœu n° 10'],[172,202,'emis','Émission'],[202,217,'resp','Respiration'],[217,220,'appel','Appel']];
-const SHORT={resp:'Respiration',appel:'Appel',voix:'Voix',bip:'',rec:'REC',charge:'Charge',apais:'',hors:'Hors',emis:'Émission'};
-const NOW={resp:'La tour vit et attend. Des caractères cryptiques circulent sur l\'anneau, la lumière respire.',appel:'Toute la tour sonne : tore, washs et sommet battent au rythme de la sonnerie.',hors:'Quelqu\'un décroche sans sonnerie. Un son court le fait patienter ; au raccroché, la tour le rappelle.',voix:'La voix de la tour parle au combiné. Au sommet, les diffuseurs s\'allument l\'un après l\'autre, comme une information qui arrive.',bip:'Le bip donne la parole.',rec:'Le visiteur dit son vœu. Tout l\'anneau réagit à sa voix, les trois diffuseurs du sommet sont rouges.',charge:'Le vœu entre dans la tour : plasma, état de charge, éclair, puis l\'énergie monte jusqu\'au sommet.',apais:'La tour reste éveillée quelques secondes, puis s\'apaise.',emis:'Le dixième vœu referme l\'anneau. La tour élève les dix vœux vers le ciel.'};
-const RL=[[0,15,'L02'],[15,25,'L03'],[25,45,'L02'],[45,48,'L03'],[48,56,'L05'],[56,82,'L06'],[82,92,'L07'],[92,96,'L08'],[96,99,'L04'],[99,101,'L08'],[101,103,'L03'],[103,111,'L05'],[111,172,'L06'],[172,202,'L09'],[202,217,'L02'],[217,220,'L03']];
+const T=220,COLS=377,ROWS=10;
+const MOM=[[0,15,'resp','Respiration'],[15,25,'appel','Appel sans réponse'],[25,45,'resp','Respiration'],[45,48,'appel','Appel'],[48,56,'voix','Transmission, voix'],[56,57,'bip','Bip'],[57,82,'rec','Transmission, vœu n° 9'],[82,92,'envoi','Envoi du vœu n° 9'],[92,96,'resp','Respiration'],[96,99,'hors','Décroché hors appel'],[99,101,'resp','Respiration'],[101,103,'appel','Appel'],[103,111,'voix','Transmission, voix'],[111,112,'bip','Bip'],[112,172,'rec','Transmission, vœu n° 10'],[172,202,'emis','Émission, dixième vœu'],[202,217,'resp','Respiration'],[217,220,'appel','Appel']];
+const SHORT={resp:'Respiration',appel:'Appel',voix:'Voix',bip:'',rec:'REC',envoi:'Envoi',hors:'Occupé',emis:'Émission'};
+const NOW={resp:'La tour vit et attend. Des caractères cryptiques circulent sur l\'anneau, la lumière respire, la nappe sonore tourne.',appel:'Toute la tour sonne avec le téléphone : tore, washs et sommet battent au rythme de la sonnerie.',hors:'Quelqu\'un décroche sans sonnerie et entend la tonalité occupée. Au raccroché, la tour le rappelle.',voix:'La voix de la tour parle au combiné. Au sommet, les diffuseurs s\'allument l\'un après l\'autre, comme une information qui arrive.',bip:'Le bip donne la parole.',rec:'Le visiteur dit son vœu. Une boucle de lumière parcourt l\'anneau, les trois diffuseurs du sommet sont rouges, les enceintes se taisent.',envoi:'Le visiteur raccroche, la tour réagit aussitôt : plasma, éclair, la lumière monte jusqu\'au sommet. La même séquence pour chaque vœu.',emis:'Le dixième vœu déclenche la séquence spéciale : la tour envoie les vœux vers le ciel.'};
+const RL=[[0,15,'L02'],[15,25,'L03'],[25,45,'L02'],[45,48,'L03'],[48,56,'L05'],[56,82,'L06'],[82,92,'L07'],[92,96,'L02'],[96,99,'L04'],[99,101,'L02'],[101,103,'L03'],[103,111,'L05'],[111,172,'L06'],[172,202,'L09'],[202,217,'L02'],[217,220,'L03']];
 const RC=[[15,25,'A02'],[45,48,'A02'],[48,56,'A04'],[56,57,'A05'],[57,82,'MIC'],[96,99,'A03'],[101,103,'A02'],[103,111,'A04'],[111,112,'A05'],[112,172,'MIC'],[172,175,'A07'],[217,220,'A02']];
-const RS=[[0,15,'A01'],[15,25,'A02'],[25,45,'A01'],[45,48,'A02'],[57,82,'A06'],[82,92,'A08'],[92,101,'A01'],[101,103,'A02'],[112,172,'A06'],[172,202,'A09'],[202,217,'A01'],[217,220,'A02']];
-const RE=[[0,15,'E01'],[15,25,'E02'],[25,45,'E01'],[45,48,'E02'],[48,56,'E03'],[56,82,'E04'],[82,97,'E05'],[97,101,'E01'],[101,103,'E02'],[103,111,'E03'],[111,172,'E04'],[172,202,'E05'],[202,217,'E01'],[217,220,'E02']];
+const RS=[[0,57,'A01'],[57,82,'MIC'],[82,92,'A08'],[92,112,'A01'],[112,172,'MIC'],[172,202,'A09'],[202,220,'A01']];
+const RR=[[15,25,'A02'],[45,48,'A02'],[101,103,'A02'],[217,220,'A02']];
+const RE=[[0,15,'E01'],[15,25,'E02'],[25,45,'E01'],[45,48,'E02'],[48,56,'E03'],[56,82,'E04'],[82,92,'E05'],[92,101,'E01'],[101,103,'E02'],[103,111,'E03'],[111,172,'E04'],[172,202,'E05'],[202,217,'E01'],[217,220,'E02']];
 const ZONE={to:()=>true,wa:c=>c!=='L05'&&c!=='L06',so:()=>true,gl:c=>c==='L03'||c==='L09'};
 const STATES=[
-['Réveil','La tour s\'éveille.','vers 17:00',null,'Le festival ouvre, peu de public assiste à ce moment.','Les washs s\'allument niveau par niveau, du bas vers le haut, et révèlent la structure ; la lumière gagne le tore, puis le sommet, et la respiration s\'installe.','Une séquence courte.',['A10','L01']],
-['Respiration','La tour vit et attend.','15 à 110 s',0,'Les passants découvrent une tour qui semble vivante. C\'est l\'état que verront le plus de passants, souvent sans décrocher : il doit tenir seul le spectacle.','Respiration lente du tore et battement de cœur ponctuel. Des caractères de toutes les écritures circulent et surgissent sur l\'anneau. Le sommet respire en léger décalage ; les washs éclairent toute la tour, faibles, en dégradé vers le haut.','Nappe discrète, souffle, battement grave dans le caisson. L\'écran affiche la maxime.',['A01','L02','E01']],
-['Appel','La tour convoque.','10 s',15,'Le téléphone sonne au hasard. Celui qui décroche devient celui que la tour a choisi ; les autres regardent. Sans réponse, la tour retombe dans sa respiration et rappellera plus tard.','Toute la tour sonne : tore, sommet et trois niveaux de washs battent ensemble, deux coups et un silence. Le globe clignote comme une balise.','La sonnerie sort du poste, relayée par les enceintes dans tout le jardin. L\'écran passe en alerte.',['A02','L03','E02']],
-['Décroché hors appel','La tour fait patienter.','jusqu\'au raccroché',96,'Quelqu\'un décroche alors que rien ne sonne. Il entend un son court et raccroche ; deux secondes plus tard, la tour le rappelle. Ne joue que pendant la respiration.','La lumière ne change presque pas, à peine un frémissement : toute la surprise tient dans le rappel.','Un souffle ou une phrase courte dans le combiné, au choix de DTS.',['A03','L04']],
-['Transmission','La tour enregistre.','voix, puis vœu de 60 s au plus',48,'La voix dit à l\'oreille : « Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis demande de raccrocher pour envoyer le vœu. Un bip donne la parole ; le raccroché envoie le vœu.','Les washs s\'éteignent et le pied de la tour devient intime. Pendant la voix, le tore est enveloppant et les diffuseurs du sommet s\'allument l\'un après l\'autre, comme une information qui arrive. Pendant le vœu, tout l\'anneau réagit à la voix sans jamais l\'écrire, et les trois diffuseurs sont rouges : c\'est le voyant REC de la tour.','La voix et le bip dans le combiné ; une bande magnétique qui tourne à bas volume dans les enceintes. L\'écran donne la traduction, puis le REC et le compte à rebours des 10 dernières secondes.',['A04','A05','A06','A07','L05','L06','E03','E04']],
-['Chargement','Le vœu entre dans la tour.','10 s, vœux 1 à 9',82,'Le visiteur raccroche et lève les yeux : c\'est sa récompense, elle doit avoir une très belle intensité.','Plasma qui pulse et se compresse. L\'état de charge apparaît : les vœux précédents en blocs blancs, les caractères qui se rassemblent sur le segment suivant, puis un éclair qui le fige. L\'énergie monte par les washs jusqu\'au sommet et reste dans la tour.','Une montée de charge électrique qui se résout dans un impact. Ensuite, 15 s d\'apaisement avant le prochain appel.',['A08','L07','L08','E05']],
-['Émission','La tour élève les vœux.','30 s, au dixième vœu',172,'Le dixième vœu referme l\'anneau. C\'est le grand moment collectif, celui que le public au pied de la tour attend.','L\'anneau entièrement blanc pulse de plus en plus vite ; les washs font monter la lumière en vagues de plus en plus rapides. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate, le globe lance son flash. La tour revient vide et apaisée.','Composition immersive en crescendo, point culminant au tir. Plusieurs variantes alternent d\'une émission à l\'autre.',['A09','L09','E05']],
-['Endormissement','La tour s\'endort.','22:00',null,'Le festival ferme.','Le mouvement inverse du réveil : la respiration ralentit, le sommet puis le tore s\'éteignent, les washs descendent jusqu\'au noir.','Une séquence courte.',['A11','L10']]];
+['Respiration','La tour vit et attend.','entre deux appels',0,'Les passants découvrent une tour qui semble vivante. C\'est l\'état que verront le plus de passants, souvent sans décrocher : il doit tenir seul le spectacle.','Respiration lente du tore et battement de cœur ponctuel. Des caractères de toutes les écritures circulent et surgissent sur l\'anneau, en teintes chaudes. Le sommet respire en léger décalage ; les washs éclairent la structure en statique.','Une nappe analogique, souffle et battement, qui tourne en fond. L\'écran affiche la maxime.',['A01','L02','E01']],
+['Appel','La tour convoque.','10 s',15,'Le téléphone sonne au hasard. Celui qui décroche devient celui que la tour a choisi ; les autres regardent. Sans réponse, la tour retombe dans sa respiration et rappellera plus tard.','Toute la tour sonne : tore, sommet et washs battent ensemble, deux coups et un silence. Le globe, s\'il est installé, clignote comme une balise.','Une vraie sonnerie de téléphone, mécanique, qui sort du poste. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez. L\'écran passe en alerte.',['A02','L03','E02']],
+['Décroché hors appel','La ligne est occupée.','jusqu\'au raccroché',96,'Quelqu\'un décroche alors que rien ne sonne et entend la tonalité occupée. Il raccroche ; deux secondes plus tard, la tour le rappelle. Ne joue que pendant la respiration.','La lumière ne change presque pas, à peine un frémissement : toute la surprise tient dans le rappel.','La tonalité occupée, avec les vrais codes sonores de la téléphonie.',['A03','L04']],
+['Transmission','La tour enregistre.','voix, puis vœu de 60 s au plus',48,'La voix dit à l\'oreille : « Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis demande de raccrocher pour envoyer le vœu. Un bip donne la parole ; le raccroché envoie le vœu.','Les washs s\'éteignent et le pied de la tour devient intime. Pendant la voix, le tore est enveloppant et les diffuseurs du sommet s\'allument l\'un après l\'autre, comme une information qui arrive. Pendant le vœu, une boucle de lumière parcourt l\'anneau, coupée au raccroché quelle que soit la durée du vœu ; les trois diffuseurs sont rouges, c\'est le voyant REC de la tour.','La voix et le bip dans le combiné, la nappe en fond pendant la voix. Pendant l\'enregistrement, les enceintes se taisent : c\'est le seul moment de silence. L\'écran donne la traduction, puis le REC et le compte à rebours des 10 dernières secondes.',['A04','A05','A07','L05','L06','E03','E04']],
+['Envoi','La tour réagit au vœu.','10 s, à chaque vœu',82,'Le visiteur raccroche et la tour réagit aussitôt : une cause, un effet. La séquence est la même pour tous les visiteurs et doit avoir une très belle intensité.','Le plasma pulse et se rassemble dans le tore, un éclair le traverse, puis la lumière monte le long du mât, niveau par niveau, jusqu\'au sommet qui s\'illumine. La tour revient ensuite directement à sa respiration.','Une montée électrique, analogique, qui se résout dans un impact. Pas de silence après le vœu.',['A08','L07','E05']],
+['Émission','Tous les dix vœux.','30 s',172,'Le dixième vœu déclenche une séquence spéciale, plus longue et plus intense. Elle ajoute de la surprise et rythme la soirée.','L\'anneau se remplit de lumière et pulse de plus en plus vite ; la lumière monte le long du mât en vagues de plus en plus rapides. Puis le tir : coupure nette, l\'anneau se vide vers le haut, le sommet éclate, le globe lance son flash. La tour revient à sa respiration.','Composition immersive en crescendo, point culminant au tir. Plusieurs variantes alternent d\'une émission à l\'autre.',['A09','L09','E05']]];
 const FILES=[
-['A01','Nappe de respiration','enceintes, caisson','boucle','Le souffle de la tour au repos, discret, avec un battement grave calé sur la lumière.'],
-['A02','Sonnerie','poste, enceintes','10 s','L\'appel de la tour, identifiable entre tous ; il doit s\'entendre dans tout le jardin.'],
-['A03','Son d\'attente','combiné','court','Un souffle ou une phrase courte pour qui décroche sans sonnerie : la tour va rappeler.'],
+['A01','Nappe de respiration','enceintes','boucle','Le souffle de la tour, analogique, qui tourne en fond sauf pendant l\'enregistrement du vœu.'],
+['A02','Sonnerie','poste ; enceintes en renfort','10 s','Une vraie sonnerie de téléphone, mécanique. Les enceintes ne la renforcent que si le poste ne s\'entend pas assez.'],
+['A03','Tonalité occupée','combiné','jusqu\'au raccroché','Pour qui décroche sans sonnerie, avec les vrais codes sonores de la téléphonie.'],
 ['A04','Voix d\'accueil','combiné','à mesurer','« Je suis la tour des possibles et j\'ai une question pour toi. Quel est ton vœu le plus cher ? », puis la consigne de raccrocher.'],
 ['A05','Bip','combiné','< 1 s','Donne la parole au visiteur.'],
-['A06','Bande magnétique','enceintes','boucle','Le ronronnement d\'une bande qui enregistre : le public entend que la tour écoute.'],
 ['A07','Fin à 60 s','combiné','court','Invite à raccrocher quand la minute est écoulée.'],
-['A08','Chargement','enceintes, caisson','10 s','Une montée de charge électrique qui se résout dans un impact au moment où le vœu se fige.'],
-['A09','Émission, variantes','enceintes, caisson','30 s','Crescendo immersif, point culminant au tir ; plusieurs variantes en alternance.'],
-['A10','Réveil','enceintes','court','L\'éveil de la tour à l\'ouverture.'],
-['A11','Endormissement','enceintes','court','La tour s\'endort à la fermeture.'],
-['L01','Réveil','washs, tore, sommet','à fixer','Les washs révèlent le mât du bas vers le haut, puis le tore et le sommet s\'allument.'],
-['L02','Respiration','toutes','boucle','Un organisme endormi : respiration lente, battement ponctuel, caractères cryptiques qui circulent sur l\'anneau.'],
+['A08','Envoi','enceintes','10 s','Une montée électrique, analogique, qui se résout dans un impact ; la même pour chaque vœu.'],
+['A09','Émission, variantes','enceintes','30 s','Crescendo immersif, point culminant au tir ; plusieurs variantes en alternance.'],
+['L02','Respiration','toutes','boucle','Respiration lente, battement ponctuel, caractères cryptiques en teintes chaudes ; washs fixes sur la structure.'],
 ['L03','Appel','toutes, globe','10 s','Toute la tour bat avec la sonnerie, deux coups et un silence.'],
 ['L04','Frémissement','tore','court','À peine perceptible, pour qui décroche hors appel.'],
 ['L05','Accueil','tore, sommet','durée de A04','Tore enveloppant ; diffuseurs du sommet allumés en séquence, comme une information qui arrive ; washs éteints.'],
-['L06','Enregistrement','tore, sommet','0 à 60 s','Tout l\'anneau réagit à la voix ; les trois diffuseurs du sommet en rouge, voyant REC.'],
-['L07','Chargement','tore, washs, sommet','10 s','Plasma, état de charge en blocs blancs, éclair qui fige le nouveau bloc, énergie qui monte jusqu\'au sommet et reste dans la tour.'],
-['L08','Apaisement','toutes','15 s','L\'état de charge s\'efface et la respiration revient.'],
-['L09','Émission, variantes','toutes, globe','30 s','Anneau blanc qui pulse, vagues d\'élévation par les washs, tir : coupure nette, éclat du sommet, flash du globe.'],
-['L10','Endormissement','toutes','à fixer','Le mouvement inverse du réveil.'],
+['L06','Enregistrement','tore, sommet','0 à 60 s','Une boucle coupée au raccroché, pour s\'adapter à la durée de chaque vœu ; les trois diffuseurs en rouge, voyant REC.'],
+['L07','Envoi','tore, washs, sommet','10 s','Plasma qui se rassemble, éclair, lumière qui monte le long du mât jusqu\'au sommet ; la même séquence pour chaque vœu.'],
+['L09','Émission, variantes','toutes, globe','30 s','Anneau qui se remplit et pulse, vagues de lumière le long du mât, tir : coupure nette, éclat du sommet, flash du globe.'],
 ['E01','Maxime','écran','respiration','« Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun », en français et en anglais.'],
 ['E02','Alerte d\'appel','écran','appel','Écran rouge, invitation à décrocher.'],
 ['E03','Traduction et consignes','écran','voix','Traduction anglaise de la voix ; parler après le bip, raccrocher pour envoyer.'],
 ['E04','REC','écran','vœu','Voyant REC et temps écoulé ; compte à rebours sur les 10 dernières secondes.'],
-['E05','Numéro du vœu','écran','charge, émission','Le numéro du vœu et la maxime.']];
+['E05','Numéro du vœu','écran','envoi, émission','Le numéro du vœu et la maxime.']];
 const MAX1='Un vœu personnel devient souvent plus fort lorsqu\'il contribue au bien commun.',MAX1E='A personal wish often grows stronger when it serves the common good.';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -299,92 +295,85 @@ const cueAt=(R,t)=>R.find(r=>t>=r[0]&&t<r[1]);
 const breath=t=>.5-.5*Math.cos(2*Math.PI*t/6.5);
 const heart=t=>{const p=t%6.5;return g(p,4,.07)+.6*g(p,4.32,.07)};
 const ring=u=>{const c=u%2;return (c<.4||(c>=.6&&c<1))?1:0};
-const voice=t=>{const s=Math.max(0,Math.sin(2*Math.PI*t*3.1));return Math.sqrt(s)*(.6+.4*Math.sin(2*Math.PI*t*.37))*(Math.sin(2*Math.PI*t*.23)>-.55?1:.12)};
-const charge=t=>t<88?8:t<176.5?9:t<195?10:0;
+const count=t=>t<82?8:t<172?9:t<202?10:0;
 const W=new Float32Array(COLS*ROWS),C=new Float32Array(COLS*ROWS);
-function put(x,y,v){x=((x%COLS)+COLS)%COLS;const i=y*COLS+x;if(v>W[i])W[i]=v}
-function chars(t,amp,dens,gather,gamp){for(let s=0;s<54;s++){const x0=Math.floor(((s*7-t*3)%COLS+COLS)%COLS),tick=Math.floor(t*.6+s*.37);let inG=false;if(gather>=0){const xc=(x0+2)%COLS;inG=xc>=Math.round(gather*SEG)&&xc<Math.round((gather+1)*SEG)}const d=inG?Math.max(dens,gamp):dens;if(h2(s,tick)>=d)continue;const gl=GL[Math.floor(h2(s+99,tick)*GL.length)];const pop=h2(s+7,Math.floor(t*1.5))<.05?.6:0;const b=inG?Math.min(1,.5+.5*gamp):Math.min(1,amp*(.45+.4*h2(s+3,tick))+pop);for(let r=0;r<8;r++)for(let c=0;c<5;c++)if((gl[r]>>c)&1)put(x0+c,r+1,b)}}
-function blocks(n,k,v){if(k<=0)return;for(let b=0;b<n;b++){const a=Math.round(b*SEG),e=Math.round((b+1)*SEG);for(let x=a;x<e;x++)for(let y=0;y<ROWS;y++){const i=y*COLS+x;W[i]=W[i]*(1-k)+v*k}}}
+function put(B,x,y,v){x=((x%COLS)+COLS)%COLS;const i=y*COLS+x;if(v>B[i])B[i]=v}
+function chars(t,amp,dens){for(let s=0;s<54;s++){const x0=Math.floor(((s*7-t*3)%COLS+COLS)%COLS),tick=Math.floor(t*.6+s*.37);if(h2(s,tick)>=dens)continue;const gl=GL[Math.floor(h2(s+99,tick)*GL.length)];const pop=h2(s+7,Math.floor(t*1.5))<.05?.6:0;const b=Math.min(1,amp*(.5+.4*h2(s+3,tick))+pop);for(let r=0;r<8;r++)for(let c=0;c<5;c++)if((gl[r]>>c)&1)put(C,x0+c,r+1,b)}}
 function model(t){
 const m=momAt(t),k=m[2],u=t-m[0];let w=[0,0,0],so=[0,0,0],rec=false,gl=0,off=false;
 W.fill(0);C.fill(0);
-const br=breath(t),base=[.32,.22,.12],bw=.85+.15*br;
+const br=breath(t),base=[.34,.26,.18];
 const respSom=i=>.3+.22*Math.sin(2*Math.PI*t/6.5+i*.8)+(h2(i,Math.floor(t*2.3))<.06?.35:0);
-if(k==='resp'||k==='apais'||k==='hors'){
- chars(t,.35+.45*br+.4*heart(t),.55,-1,0);
- for(let i=0;i<COLS*ROWS;i++)W[i]=Math.max(W[i],.04+.05*br);
- w=base.map(v=>v*bw);so=[0,1,2].map(respSom);
- if(k==='hors'){off=true;for(let i=0;i<120;i++){put(Math.floor(h2(i,Math.floor(t*8))*COLS),Math.floor(h2(i+5,Math.floor(t*8))*ROWS),.5)}}
- if(t>=92&&t<101){blocks(9,1-sm(92,96,t),.85);const r=sm(92,99,t);w=w.map((v,i)=>v*r+(1-r)*(i===2?.55:.4));so=so.map(v=>v*r+(1-r)*.85)}
-}else if(k==='appel'){const on=ring(u);chars(t,.2,.45,-1,0);for(let i=0;i<COLS*ROWS;i++){const y=Math.floor(i/COLS);W[i]=Math.max(W[i],on*(.75+.25*Math.sin(u*9+y)))}w=[.08,.08,.08].map(v=>v+.9*on);so=[1,1,1].map(()=>.1+.85*on);gl=.85*on}
-else if(k==='voix'){off=true;for(let x=0;x<COLS;x++){const v=.18+.14*Math.sin(x*2*Math.PI/COLS*2-t*.8);for(let y=0;y<ROWS;y++)W[y*COLS+x]=v*(1-Math.abs(y-4.5)/9)}const ph=(u*.9)%1;so=[0,1,2].map(i=>.08+.9*g(ph*3.6,(2-i)+.4,.42))}
+const resp=()=>{chars(t,.4+.45*br+.4*heart(t),.55);for(let i=0;i<COLS*ROWS;i++)W[i]=Math.max(W[i],.03+.04*br);w=base.slice();so=[0,1,2].map(respSom)};
+if(k==='resp'||k==='hors'){resp();if(k==='hors'){off=true;for(let i=0;i<120;i++)put(W,Math.floor(h2(i,Math.floor(t*8))*COLS),Math.floor(h2(i+5,Math.floor(t*8))*ROWS),.45)}}
+else if(k==='appel'){const on=ring(u);chars(t,.25,.45);for(let i=0;i<COLS*ROWS;i++){const y=Math.floor(i/COLS);W[i]=Math.max(W[i],on*(.75+.25*Math.sin(u*9+y)))}w=[0,1,2].map(()=>.1+.9*on);so=[1,1,1].map(()=>.1+.85*on);gl=.85*on}
+else if(k==='voix'){off=true;for(let x=0;x<COLS;x++){const v=.18+.14*Math.sin(x*2*Math.PI/COLS*2-t*.8);for(let y=0;y<ROWS;y++){W[y*COLS+x]=v*(1-Math.abs(y-4.5)/9);C[y*COLS+x]=.12*(1-Math.abs(y-4.5)/5)}}const ph=(u*.9)%1;so=[0,1,2].map(i=>.08+.9*g(ph*3.6,(2-i)+.4,.42))}
 else if(k==='bip'){off=true;for(let x=0;x<COLS;x++){W[4*COLS+x]=.6*(1-u);W[5*COLS+x]=.6*(1-u)}rec=true;so=[.8,.8,.8]}
-else if(k==='rec'){off=true;const a=voice(t);for(let x=0;x<COLS;x++){const h=a*4.6*(.55+.45*Math.sin(x*.11-t*5))*(.7+.3*Math.sin(x*.031+t*1.3));for(let y=0;y<ROWS;y++){const d=Math.abs(y-4.5);if(d<h)W[y*COLS+x]=.85-d*.05;else if(d<.6)W[y*COLS+x]=.12}}rec=true;so=[0,1,2].map(()=>.72+.1*Math.sin(t*1.6))}
-else if(k==='charge'){const p=u,n=8;
- if(p<4){const fq=1+p*1.6,pl=.5+.5*Math.sin(2*Math.PI*fq*p),xc=(n+.5)*SEG,sp=Math.max(25,190*(1-p/4.6));for(let x=0;x<COLS;x++){let dx=Math.abs(x-xc);dx=Math.min(dx,COLS-dx);const wgt=Math.exp(-dx/sp);for(let y=0;y<ROWS;y++)C[y*COLS+x]=cl(wgt*(.25+.75*pl)*(.35+.65*h2(x*31+y,Math.floor(p*14)))*(.4+p/4))}}
- else if(p<6.2){chars(t,.3,.35,n,sm(4,6,p));blocks(n,sm(4,4.6,p),.85);for(let x=0;x<COLS;x++)for(let y=0;y<ROWS;y++)C[y*COLS+x]=.25*(1-sm(4,5,p))*h2(x+y*7,Math.floor(p*14))}
- else{const fl=p<6.45?1-(p-6.2)/.25:0;blocks(n+1,1,.85);for(let i=0;i<COLS*ROWS;i++)W[i]=Math.max(W[i],fl,.05)}
- w=[0,1,2].map(i=>Math.max(g(p,6.6+i*.95,.38),(i===2?.55:.4)*sm(9,9.6,p)));
- so=[0,1,2].map(()=>p<9.3?.12:.12+.75*sm(9.3,9.8,p));
+else if(k==='rec'){off=true;for(let x=0;x<COLS;x++){const h=3.4*(.55+.45*Math.sin(x*.11-t*4))*(.75+.25*Math.sin(x*.031+t*.9));for(let y=0;y<ROWS;y++){const d=Math.abs(y-4.5);if(d<h)W[y*COLS+x]=.8-d*.06;else if(d<.6)W[y*COLS+x]=.12}}rec=true;so=[0,1,2].map(()=>.72+.1*Math.sin(t*1.6))}
+else if(k==='envoi'){const p=u;
+ if(p<3){const fq=1+p*2,pl=.5+.5*Math.sin(2*Math.PI*fq*p),sp=Math.max(18,190*(1-p/3.3));for(let x=0;x<COLS;x++){const dx=Math.min(x,COLS-x),wgt=Math.exp(-dx/sp);for(let y=0;y<ROWS;y++)C[y*COLS+x]=cl(wgt*(.3+.7*pl)*(.35+.65*h2(x*31+y,Math.floor(p*14)))*(.45+p/3))}}
+ else if(p<3.35){W.fill(1)}
+ else{const d=Math.exp(-(p-3.35)*1.6);for(let i=0;i<COLS*ROWS;i++)W[i]=.7*d;if(p>5.5){chars(t,(.4+.45*br)*sm(5.5,9,p),.55*sm(5.5,9,p))}}
+ w=[0,1,2].map(i=>Math.max(g(p,3.9+i*.75,.32),base[i]*sm(6.5,8.5,p)));
+ so=[0,1,2].map(i=>p<5.8?.12:Math.max(p<6.1?sm(5.8,6.1,p):Math.exp(-(p-6.1)*1.2),respSom(i)*sm(7,10,p)));
 }else if(k==='emis'){const q=u;
- if(q<4.5){chars(t,.3,.35,9,sm(.5,4,q));blocks(q>4.2?10:9,1,.85);w=[.15,.08,.04];so=[.2,.2,.2]}
- else if(q<23){const z=q-4.5,ph=.5*z+3.5*z*z/37,pl=.5+.5*Math.sin(2*Math.PI*ph);for(let i=0;i<COLS*ROWS;i++)W[i]=.5+.45*pl;
+ if(q<4.5){chars(t,.35,.4);const f=q/4.5*COLS;for(let x=0;x<f;x++)for(let y=0;y<ROWS;y++)W[y*COLS+x]=.8;w=[.1,.08,.06];so=[.2,.2,.2]}
+ else if(q<23){const z=q-4.5,ph=.5*z+3.5*z*z/37,pl=.5+.5*Math.sin(2*Math.PI*ph);for(let i=0;i<COLS*ROWS;i++){W[i]=.5+.45*pl;C[i]=.25*pl}
   if(q<21){const Tp=3-2.4*(z/16.5),cyc=(z/Tp)%1,amp=.5+.5*(z/16.5);w=[0,1,2].map(i=>amp*Math.max(0,1-Math.abs(cyc*3-i-.5)*1.4))}else w=[1,1,1];
   so=[0,1,2].map(()=>.2+.65*(z/18.5)*(.75+.25*pl))}
  else if(q<23.3){W.fill(1);so=[1,1,1];gl=1}
  else if(q<24.6){const e=(q-23.3)/1.3;for(let y=0;y<ROWS;y++){const v=cl(1-(e*14-(ROWS-1-y)));for(let x=0;x<COLS;x++)W[y*COLS+x]=v}so=[1,1,1].map(()=>1-.3*e);gl=Math.exp(-(q-23)*2.2)}
- else{const r=sm(24.6,30,q);chars(t,(.35+.45*br)*r,.55*r,-1,0);w=base.map(v=>v*r);so=[0,1,2].map(i=>.7*(1-r)+respSom(i)*r);gl=Math.exp(-(q-23)*2.2)}
+ else{const r=sm(24.6,30,q);chars(t,(.4+.45*br)*r,.55*r);w=base.map(v=>v*r);so=[0,1,2].map(i=>.7*(1-r)+respSom(i)*r);gl=Math.exp(-(q-23)*2.2)}
 }
-return {m,k,u,w,so,rec,gl,off,scr:(cueAt(RE,t)||RE[0])[2],ch:charge(t)};
+return {m,k,u,w,so,rec,gl,off,scr:(cueAt(RE,t)||RE[0])[2],n:count(t)};
 }
 /* drawing */
 const cv=$('tower'),c=cv.getContext('2d'),bd=$('bandc'),bx=bd.getContext('2d'),img=bx.createImageData(COLS,ROWS);
-const LED=[255,244,226],PL=[111,214,255],RED=[255,59,59];
-const pix=i=>{const w=W[i],q=C[i];return [Math.min(255,LED[0]*w+PL[0]*q),Math.min(255,LED[1]*w+PL[1]*q),Math.min(255,LED[2]*w+PL[2]*q),Math.max(w,q)]};
+const LED=[255,238,212],AMB=[255,150,46],RED=[255,59,59];
+const pix=i=>{const w=W[i],q=C[i];return [Math.min(255,LED[0]*w+AMB[0]*q),Math.min(255,LED[1]*w+AMB[1]*q),Math.min(255,LED[2]*w+AMB[2]*q),Math.max(w,q)]};
 let TW=0,TH=0,DPR=1;
 function size(){DPR=Math.min(2,window.devicePixelRatio||1);TW=cv.clientWidth;TH=cv.clientHeight;cv.width=Math.round(TW*DPR);cv.height=Math.round(TH*DPR)}
 function drawTower(S){
  c.setTransform(DPR,0,0,DPR,0,0);const w=TW,h=TH;c.clearRect(0,0,w,h);
- const sky=c.createRadialGradient(w*.45,h*.95,10,w*.45,h*.9,Math.max(w,h)*.6);sky.addColorStop(0,'#0E141D');sky.addColorStop(1,'#07080A');c.fillStyle=sky;c.fillRect(0,0,w,h);
+ const sky=c.createRadialGradient(w*.45,h*.95,10,w*.45,h*.9,Math.max(w,h)*.6);sky.addColorStop(0,'#141210');sky.addColorStop(1,'#07080A');c.fillStyle=sky;c.fillRect(0,0,w,h);
  for(let i=0;i<70;i++){const x=h2(i,3)*w,y=h2(i,9)*h*.85,a=.15+.45*h2(i,5);c.fillStyle='rgba(220,230,255,'+a+')';c.fillRect(x,y,1,1)}
  const narrow=w<520,gy=h-38,s=Math.min((gy-22)/16.6,(w-(narrow?30:230))/14.4),cx=narrow?w/2:Math.max(w*.42,6.8*s+40);
  const Y=m=>gy-m*s,ryK=.16;
- c.fillStyle='#0B0F15';c.beginPath();c.ellipse(cx,gy,7.4*s,7.4*s*ryK,0,0,7);c.fill();
- const L=[30,150,270].map(a=>{const r=a*Math.PI/180;return{x:cx+5.5*s*Math.cos(r),y:gy+5.5*s*ryK*Math.sin(r),back:a===270}});
- const mast=Math.max(3,.17*s);
+ c.fillStyle='#0E0D0C';c.beginPath();c.ellipse(cx,gy,7.4*s,7.4*s*ryK,0,0,7);c.fill();
+ const L=[30,150,270].map(a=>{const r=a*Math.PI/180;return{x:cx+5.5*s*Math.cos(r),y:gy+5.5*s*ryK*Math.sin(r),back:a===270,wash:a===30}});
+ const WL=L[0],mast=Math.max(3,.17*s);
  c.save();c.globalCompositeOperation='lighter';
- L.forEach(l=>[0,1,2].forEach(i=>{const v=S.w[i];if(v<.01)return;const y0=Y(i*5+.3),y1=Y(i*5+4.7),fx=l.x,fy=l.y-.95*s-6;const gr=c.createLinearGradient(fx,fy,cx,(y0+y1)/2);gr.addColorStop(0,'rgba(255,240,215,'+(.14*v)+')');gr.addColorStop(1,'rgba(255,240,215,'+(.03*v)+')');c.fillStyle=gr;c.beginPath();c.moveTo(fx-3,fy);c.lineTo(cx-mast*1.6,y1);c.lineTo(cx+mast*1.6,y0);c.lineTo(fx+3,fy);c.closePath();c.fill()}));
+ [0,1,2].forEach(i=>{const v=S.w[i];if(v<.01)return;const y0=Y(i*5+.3),y1=Y(i*5+4.7),fx=WL.x+(i-1)*7,fy=WL.y-.95*s-6;const gr=c.createLinearGradient(fx,fy,cx,(y0+y1)/2);gr.addColorStop(0,'rgba(255,226,190,'+(.2*v)+')');gr.addColorStop(1,'rgba(255,226,190,'+(.04*v)+')');c.fillStyle=gr;c.beginPath();c.moveTo(fx-3,fy);c.lineTo(cx-mast*1.6,y1);c.lineTo(cx+mast*1.6,y0);c.lineTo(fx+3,fy);c.closePath();c.fill()});
  c.restore();
- const lest=l=>{const bw=1.3*s,bh=.95*s;c.fillStyle=l.back?'#141A23':'#1D2531';c.fillRect(l.x-bw/2,l.y-bh,bw,bh);c.fillStyle='#283242';c.fillRect(l.x-bw/2,l.y-bh,bw,Math.max(2,bh*.1));c.fillStyle='#2F3A4B';c.beginPath();c.moveTo(l.x-5,l.y-bh);c.lineTo(l.x+5,l.y-bh);c.lineTo(l.x+3,l.y-bh-7);c.lineTo(l.x-3,l.y-bh-7);c.fill();const v=Math.max(...S.w);if(v>.02){c.fillStyle='rgba(255,244,226,'+(.3+.7*v)+')';c.fillRect(l.x-3,l.y-bh-8,6,2)}};
- const guy=l=>{c.strokeStyle=l.back?'#18202B':'#283241';c.lineWidth=1;c.beginPath();c.moveTo(cx,Y(10));c.lineTo(l.x,l.y-.95*s);c.stroke()};
+ const lest=l=>{const bw=1.3*s,bh=.95*s;c.fillStyle=l.back?'#17161A':'#211F24';c.fillRect(l.x-bw/2,l.y-bh,bw,bh);c.fillStyle='#2E2B30';c.fillRect(l.x-bw/2,l.y-bh,bw,Math.max(2,bh*.1));if(l.wash){[0,1,2].forEach(i=>{const fx=l.x+(i-1)*7;c.fillStyle='#3A3539';c.beginPath();c.moveTo(fx-3,l.y-bh);c.lineTo(fx+3,l.y-bh);c.lineTo(fx+2,l.y-bh-7);c.lineTo(fx-2,l.y-bh-7);c.fill();const v=S.w[i];if(v>.02){c.fillStyle='rgba(255,226,190,'+(.3+.7*v)+')';c.fillRect(fx-2,l.y-bh-8,4,2)}})}};
+ const guy=l=>{c.strokeStyle=l.back?'#1A1A1E':'#2A282D';c.lineWidth=1;c.beginPath();c.moveTo(cx,Y(10));c.lineTo(l.x,l.y-.95*s);c.stroke()};
  L.filter(l=>l.back).forEach(l=>{guy(l);lest(l)});
  const hR=4.5,rx=3*s,ry=3*s*ryK*1.6,yc=Y(hR),bh=.5*s;
  const ringPass=front=>{c.save();c.globalCompositeOperation='lighter';for(let i=0;i<COLS;i++){const th=Math.PI/2+2*Math.PI*i/COLS,sn=Math.sin(th);if(front?sn<0:sn>=0)continue;const x=cx+rx*Math.cos(th),y=yc+ry*sn,cw=Math.max(1.2,(2*Math.PI*rx/COLS)*Math.abs(sn)+.6),al=front?1:.4;for(let j=0;j<ROWS;j++){const p=pix(j*COLS+i);if(p[3]<.03)continue;c.fillStyle='rgba('+(p[0]|0)+','+(p[1]|0)+','+(p[2]|0)+','+(al*Math.min(1,p[3]*1.2))+')';c.fillRect(x-cw/2,y-bh/2+j*bh/ROWS,cw,bh/ROWS+.6)}}c.restore()};
- const ringFrame=front=>{c.strokeStyle=front?'#323C4B':'#1C2430';c.lineWidth=1;[-1,1].forEach(d=>{c.beginPath();c.ellipse(cx,yc+d*bh/2,rx,ry,0,front?0:Math.PI,front?Math.PI:2*Math.PI);c.stroke()})};
+ const ringFrame=front=>{c.strokeStyle=front?'#3A3640':'#1F1D22';c.lineWidth=1;[-1,1].forEach(d=>{c.beginPath();c.ellipse(cx,yc+d*bh/2,rx,ry,0,front?0:Math.PI,front?Math.PI:2*Math.PI);c.stroke()})};
  ringFrame(false);ringPass(false);
- const mg=c.createLinearGradient(cx-mast,0,cx+mast,0);mg.addColorStop(0,'#161C26');mg.addColorStop(.6,'#333E4F');mg.addColorStop(1,'#1B2330');c.fillStyle=mg;c.fillRect(cx-mast/2,Y(15),mast,15*s);
- c.fillStyle='#4A586C';[5,10].forEach(m=>c.fillRect(cx-mast*.9,Y(m)-1,mast*1.8,2));
- c.save();c.globalCompositeOperation='lighter';[0,1,2].forEach(i=>{const v=S.w[i];if(v<.01)return;const gr=c.createLinearGradient(0,Y(i*5),0,Y(i*5+5));gr.addColorStop(0,'rgba(255,238,210,'+(.5*v)+')');gr.addColorStop(.5,'rgba(255,238,210,'+(.72*v)+')');gr.addColorStop(1,'rgba(255,238,210,'+(.42*v)+')');c.fillStyle=gr;c.fillRect(cx-mast*1.4,Y(i*5+5),mast*2.8,5*s)});c.restore();
- c.strokeStyle='#252E3B';c.lineWidth=1;[30,150,270].forEach(a=>{const r=a*Math.PI/180;c.beginPath();c.moveTo(cx,Y(hR+.9));c.lineTo(cx+rx*Math.cos(r),yc+ry*Math.sin(r));c.stroke()});
- [12.35,13.35,14.35].forEach((hh,i)=>{const v=S.so[i],col=S.rec?RED:LED,y0=Y(hh+.7),hg=.7*s,dw=Math.max(5,.36*s);c.fillStyle='#1A212C';c.beginPath();c.roundRect(cx-dw/2,y0,dw,hg,dw/2);c.fill();if(v>.02){c.save();c.globalCompositeOperation='lighter';const R=hg*1.4+v*s*.8,rg=c.createRadialGradient(cx,y0+hg/2,1,cx,y0+hg/2,R);rg.addColorStop(0,'rgba('+col+','+(.7*v)+')');rg.addColorStop(1,'rgba('+col+',0)');c.fillStyle=rg;c.beginPath();c.arc(cx,y0+hg/2,R,0,7);c.fill();c.fillStyle='rgba('+col+','+Math.min(1,.3+v)+')';c.beginPath();c.roundRect(cx-dw/2,y0,dw,hg,dw/2);c.fill();c.restore()}});
- const gyy=Y(15.55),gr0=.36*s;c.setLineDash([2,3]);c.strokeStyle='#4A5568';c.beginPath();c.arc(cx,gyy,gr0,0,7);c.stroke();c.setLineDash([]);
- if(S.gl>.02){c.save();c.globalCompositeOperation='lighter';const R=gr0+S.gl*s*3,rg=c.createRadialGradient(cx,gyy,1,cx,gyy,R);rg.addColorStop(0,'rgba(255,255,255,'+S.gl+')');rg.addColorStop(1,'rgba(200,235,255,0)');c.fillStyle=rg;c.beginPath();c.arc(cx,gyy,R,0,7);c.fill();c.restore()}
+ const mg=c.createLinearGradient(cx-mast,0,cx+mast,0);mg.addColorStop(0,'#1A1A1E');mg.addColorStop(.6,'#3B3940');mg.addColorStop(1,'#1F1E23');c.fillStyle=mg;c.fillRect(cx-mast/2,Y(15),mast,15*s);
+ c.fillStyle='#55505A';[5,10].forEach(m=>c.fillRect(cx-mast*.9,Y(m)-1,mast*1.8,2));
+ c.save();c.globalCompositeOperation='lighter';[0,1,2].forEach(i=>{const v=S.w[i];if(v<.01)return;const gr=c.createLinearGradient(0,Y(i*5),0,Y(i*5+5));gr.addColorStop(0,'rgba(255,220,180,'+(.5*v)+')');gr.addColorStop(.5,'rgba(255,220,180,'+(.72*v)+')');gr.addColorStop(1,'rgba(255,220,180,'+(.42*v)+')');c.fillStyle=gr;c.fillRect(cx-mast*1.4,Y(i*5+5),mast*2.8,5*s)});c.restore();
+ c.strokeStyle='#2A282D';c.lineWidth=1;[30,150,270].forEach(a=>{const r=a*Math.PI/180;c.beginPath();c.moveTo(cx,Y(hR+.9));c.lineTo(cx+rx*Math.cos(r),yc+ry*Math.sin(r));c.stroke()});
+ [12.35,13.35,14.35].forEach((hh,i)=>{const v=S.so[i],col=S.rec?RED:LED,y0=Y(hh+.7),hg=.7*s,dw=Math.max(5,.36*s);c.fillStyle='#1E1C21';c.beginPath();c.roundRect(cx-dw/2,y0,dw,hg,dw/2);c.fill();if(v>.02){c.save();c.globalCompositeOperation='lighter';const R=hg*1.4+v*s*.8,rg=c.createRadialGradient(cx,y0+hg/2,1,cx,y0+hg/2,R);rg.addColorStop(0,'rgba('+col+','+(.7*v)+')');rg.addColorStop(1,'rgba('+col+',0)');c.fillStyle=rg;c.beginPath();c.arc(cx,y0+hg/2,R,0,7);c.fill();c.fillStyle='rgba('+col+','+Math.min(1,.3+v)+')';c.beginPath();c.roundRect(cx-dw/2,y0,dw,hg,dw/2);c.fill();c.restore()}});
+ const gyy=Y(15.55),gr0=.36*s;c.setLineDash([2,3]);c.strokeStyle='#4E4A52';c.beginPath();c.arc(cx,gyy,gr0,0,7);c.stroke();c.setLineDash([]);
+ if(S.gl>.02){c.save();c.globalCompositeOperation='lighter';const R=gr0+S.gl*s*3,rg=c.createRadialGradient(cx,gyy,1,cx,gyy,R);rg.addColorStop(0,'rgba(255,250,240,'+S.gl+')');rg.addColorStop(1,'rgba(255,200,140,0)');c.fillStyle=rg;c.beginPath();c.arc(cx,gyy,R,0,7);c.fill();c.restore()}
  ringFrame(true);ringPass(true);
  L.filter(l=>!l.back).forEach(l=>{guy(l);lest(l)});
- /* phone and screen on the mast */
- const ex=cx+mast/2,sq=.5*s,sy=Y(2.05),py=Y(1.25);
- c.fillStyle='#2A3444';c.fillRect(ex,sy+sq*.4,Math.max(2,.08*s),.6*s);
- const sc=S.scr;c.fillStyle='#161B22';c.fillRect(ex+.06*s,sy-.04*s,sq+.08*s,sq+.08*s);
+ const ex=cx+mast/2,sq=.5*s,sy=Y(2.05),py=Y(1.25),sc=S.scr;
+ c.fillStyle='#2E2B30';c.fillRect(ex,sy+sq*.4,Math.max(2,.08*s),.6*s);
+ c.fillStyle='#18171A';c.fillRect(ex+.06*s,sy-.04*s,sq+.08*s,sq+.08*s);
  c.fillStyle=sc==='E02'?'#B3161C':'#020304';c.fillRect(ex+.1*s,sy,sq,sq);
- if(sc==='E04'||sc==='E03'&&S.rec){c.fillStyle='#FF3B3B';c.beginPath();c.arc(ex+.1*s+sq/2,sy+sq/2,Math.max(1.5,sq*.16),0,7);c.fill()}
+ if(sc==='E04'){c.fillStyle='#FF3B3B';c.beginPath();c.arc(ex+.1*s+sq/2,sy+sq/2,Math.max(1.5,sq*.16),0,7);c.fill()}
  else if(sc!=='E02'){c.fillStyle='#8B9099';for(let k=0;k<3;k++)c.fillRect(ex+.1*s+sq*.18,sy+sq*(.3+k*.18),sq*(k===2?.4:.64),Math.max(1,sq*.06))}
- c.fillStyle='#2F3A4B';c.beginPath();c.roundRect(ex+.06*s,py-.18*s,.42*s,.36*s,.05*s);c.fill();
- if(!S.off){c.fillStyle='#4A586C';c.beginPath();c.roundRect(ex+.1*s,py-.24*s,.34*s,.09*s,.04*s);c.fill()}
- if(S.off){const fx=ex+1.05*s,fb=gy;c.fillStyle='#2B3444';c.beginPath();c.roundRect(fx-.17*s,fb-1.5*s,.34*s,.75*s,.1*s);c.fill();c.fillRect(fx-.12*s,fb-.78*s,.1*s,.78*s);c.fillRect(fx+.02*s,fb-.78*s,.1*s,.78*s);c.beginPath();c.arc(fx,fb-1.66*s,.14*s,0,7);c.fill();c.strokeStyle='#2B3444';c.lineWidth=Math.max(2,.06*s);c.beginPath();c.moveTo(fx-.12*s,fb-1.35*s);c.lineTo(fx-.16*s,fb-1.64*s);c.stroke()}
+ c.fillStyle='#35313A';c.beginPath();c.roundRect(ex+.06*s,py-.18*s,.42*s,.36*s,.05*s);c.fill();
+ if(!S.off){c.fillStyle='#55505A';c.beginPath();c.roundRect(ex+.1*s,py-.24*s,.34*s,.09*s,.04*s);c.fill()}
+ if(S.off){const fx=ex+1.05*s,fb=gy;c.fillStyle='#2F2C33';c.beginPath();c.roundRect(fx-.17*s,fb-1.5*s,.34*s,.75*s,.1*s);c.fill();c.fillRect(fx-.12*s,fb-.78*s,.1*s,.78*s);c.fillRect(fx+.02*s,fb-.78*s,.1*s,.78*s);c.beginPath();c.arc(fx,fb-1.66*s,.14*s,0,7);c.fill();c.strokeStyle='#2F2C33';c.lineWidth=Math.max(2,.06*s);c.beginPath();c.moveTo(fx-.12*s,fb-1.35*s);c.lineTo(fx-.16*s,fb-1.64*s);c.stroke()}
  c.font='12px system-ui,-apple-system,sans-serif';c.textBaseline='middle';
  const sx=narrow?10:Math.max(10,cx-7*s-30);c.fillStyle='#5E646D';c.strokeStyle='#1C2027';[0,5,10,15].forEach(m=>{c.beginPath();c.moveTo(sx+26,Y(m));c.lineTo(sx+32,Y(m));c.stroke();c.textAlign='left';c.fillText(m+' m',sx,Y(m))});
- if(!narrow){const lx=cx+3.4*s+28;const lab=(txt,ty,ax,ay,on)=>{c.strokeStyle='#262C35';c.beginPath();c.moveTo(ax,ay);c.lineTo(lx-8,ty);c.stroke();c.fillStyle=on?'#F4F5F7':'#8B9099';c.textAlign='left';c.fillText(txt,lx,ty)};
-  lab('Globe, option',Y(15.6),cx+gr0+2,gyy,S.gl>.05);lab('Sommet, 3 diffuseurs',Y(13.7),cx+6,Y(13.7),Math.max(...S.so)>.4);lab('Washs, haut',Y(11.2),cx+mast*1.5,Y(11.2),S.w[2]>.3);lab('Washs, milieu',Y(7.5),cx+mast*1.5,Y(7.5),S.w[1]>.3);lab('Tore, matrice 10 px',Y(hR),cx+rx,yc,true);lab('Washs, bas',Y(3.1),cx+mast*1.5,Y(3.1),S.w[0]>.3);lab('Écran et téléphone',Y(1.7),ex+sq+.2*s,sy+sq/2,S.off||sc==='E02');lab('Lests et washs',Y(.2),L[0].x+.65*s,L[0].y-.6*s,false)}
+ if(!narrow){const lx=cx+3.4*s+28;const lab=(txt,ty,ax,ay,on)=>{c.strokeStyle='#29272C';c.beginPath();c.moveTo(ax,ay);c.lineTo(lx-8,ty);c.stroke();c.fillStyle=on?'#F4F5F7':'#8B9099';c.textAlign='left';c.fillText(txt,lx,ty)};
+  lab('Globe, option',Y(15.6),cx+gr0+2,gyy,S.gl>.05);lab('Sommet, 3 diffuseurs',Y(13.7),cx+6,Y(13.7),Math.max(...S.so)>.4);lab('Mât, niveau haut',Y(11.2),cx+mast*1.5,Y(11.2),S.w[2]>.3);lab('Mât, niveau milieu',Y(7.5),cx+mast*1.5,Y(7.5),S.w[1]>.3);lab('Tore, matrice 10 px',Y(hR),cx+rx,yc,true);lab('Mât, niveau bas',Y(3.1),cx+mast*1.5,Y(3.1),S.w[0]>.3);lab('Écran et téléphone',Y(1.7),ex+sq+.2*s,sy+sq/2,S.off||sc==='E02');lab('3 washs sur un lest',Y(.2),WL.x+.65*s,WL.y-.6*s,Math.max(...S.w)>.3)}
 }
 function drawBand(){const d=img.data;for(let i=0;i<COLS*ROWS;i++){const p=pix(i);d[i*4]=p[0];d[i*4+1]=p[1];d[i*4+2]=p[2];d[i*4+3]=255}bx.putImageData(img,0,0)}
 function screenHTML(S,t){const id=S.scr;
@@ -397,19 +386,19 @@ function screenHTML(S,t){const id=S.scr;
 /* timeline */
 const pct=t=>(t/T*100)+'%';
 function lane(id,R,cls,filter){$(id).innerHTML=R.filter(r=>!filter||filter(r[2])).map(r=>{const mic=r[2]==='MIC';return '<div class="bk '+cls+(mic?' mic':'')+'" data-t="'+r[0]+'" data-w="'+(r[1]-r[0])+'" style="left:calc('+pct(r[0])+' + 1px);width:calc('+pct(r[1]-r[0])+' - 2px)" title="'+esc(fmt0(r[0])+' à '+fmt0(r[1])+(mic?', micro ouvert':', '+r[2]))+'">'+(mic?'':esc(r[2]))+'</div>'}).join('')}
-lane('t_to',RL,'l',ZONE.to);lane('t_wa',RL,'l',ZONE.wa);lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_ec',RE,'e');
+lane('t_to',RL,'l',ZONE.to);lane('t_wa',RL,'l',ZONE.wa);lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_rf',RR,'s opt');lane('t_ec',RE,'e');
 $('t_st').innerHTML=MOM.map(m=>'<div class="bk st" data-t="'+m[0]+'" data-w="'+(m[1]-m[0])+'" style="left:'+pct(m[0])+';width:'+pct(m[1]-m[0])+'" title="'+esc(m[3])+'">'+esc(SHORT[m[2]])+'</div>').join('');
 $('ax').innerHTML=[0,30,60,90,120,150,180,210].map(t=>'<span style="left:'+pct(t)+'">'+fmt0(t)+'</span>').join('');
 function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw;b.classList.toggle('nar',px<(b.classList.contains('st')?44:28))})}
 /* states and files */
 const chip=code=>'<span class="chip '+(code[0]==='L'?'l':code[0]==='A'?'s':'e')+'">'+code+'</span>';
-$('states').innerHTML=STATES.map((s,i)=>'<details class="st2"'+(i===1?' open':'')+'><summary><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="sn">'+esc(s[0])+'<span>'+esc(s[1])+'</span></span><span class="du">'+esc(s[2])+'</span><span class="pl"></span></summary><div class="body"><div></div><div><h4>Ce que vit le visiteur</h4><p>'+esc(s[4])+'</p></div><div><h4>Lumière</h4><p>'+esc(s[5])+'</p></div><div><h4>Son et écran</h4><p>'+esc(s[6])+'</p></div><div class="fx">'+s[7].map(chip).join('')+(s[3]!==null?'<button class="go" type="button" data-t="'+s[3]+'">Voir dans la séquence</button>':'')+'</div></div></details>').join('');
+$('states').innerHTML=STATES.map((s,i)=>'<details class="st2"'+(i===0?' open':'')+'><summary><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="sn">'+esc(s[0])+'<span>'+esc(s[1])+'</span></span><span class="du">'+esc(s[2])+'</span><span class="pl"></span></summary><div class="body"><div></div><div><h4>Ce que vit le visiteur</h4><p>'+esc(s[4])+'</p></div><div><h4>Lumière</h4><p>'+esc(s[5])+'</p></div><div><h4>Son et écran</h4><p>'+esc(s[6])+'</p></div><div class="fx">'+s[7].map(chip).join('')+'<button class="go" type="button" data-t="'+s[3]+'">Voir dans la séquence</button></div></div></details>').join('');
 $('ft').innerHTML='<thead><tr><th>Code</th><th>Séquence</th><th>Support</th><th>Durée</th><th></th></tr></thead><tbody>'+FILES.map((f,i)=>'<tr class="h" tabindex="0" aria-expanded="false" data-i="'+i+'"><td>'+chip(f[0])+'</td><td>'+esc(f[1])+'</td><td>'+esc(f[2])+'</td><td>'+esc(f[3])+'</td><td class="x"><span class="pl"></span></td></tr><tr class="d" hidden id="fd'+i+'"><td></td><td colspan="4">'+esc(f[4])+'</td></tr>').join('')+'</tbody>';
 const toggleRow=(tr,open)=>{const o=open??tr.getAttribute('aria-expanded')!=='true';tr.setAttribute('aria-expanded',o);$('fd'+tr.dataset.i).hidden=!o};
 $('ft').addEventListener('click',e=>{const tr=e.target.closest('tr.h');if(tr)toggleRow(tr)});
 $('ft').addEventListener('keydown',e=>{const tr=e.target.closest('tr.h');if(tr&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggleRow(tr)}});
 $('all').addEventListener('click',()=>{const open=$('all').textContent==='Tout déplier';document.querySelectorAll('#ft tr.h').forEach(tr=>toggleRow(tr,open));$('all').textContent=open?'Tout replier':'Tout déplier'});
-/* audio */
+/* audio : sons de travail */
 let AC=null,N={};
 function initAudio(){if(AC)return;try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){AC=null;return}
  const out=AC.createGain();out.gain.value=.5;out.connect(AC.destination);
@@ -417,13 +406,13 @@ function initAudio(){if(AC)return;try{AC=new (window.AudioContext||window.webkit
  const noise=()=>{const s=AC.createBufferSource();s.buffer=nb;s.loop=true;s.start();return s};
  const vo=(src,type,f,q)=>{const gg=AC.createGain();gg.gain.value=0;let node=src;if(type){const fl=AC.createBiquadFilter();fl.type=type;fl.frequency.value=f;if(q)fl.Q.value=q;src.connect(fl);node=fl}node.connect(gg);gg.connect(out);return gg};
  const osc=(type,f)=>{const o=AC.createOscillator();o.type=type;o.frequency.value=f;o.start();return o};
- N.breath=vo(noise(),'lowpass',500);
- const r1=osc('sine',440),r2=osc('sine',480),rm=AC.createGain();r1.connect(rm);r2.connect(rm);N.ring=vo(rm);
- N.hum=vo(osc('sawtooth',55),'lowpass',240);N.hiss=vo(noise(),'highpass',4500);
- N.pad=[220,277.2,329.6].map(f=>vo(osc('sine',f)));
- N.ro=osc('sawtooth',80);N.rise=vo(N.ro,'lowpass',1400);
+ N.breath=vo(noise(),'lowpass',420);
+ const b1=osc('square',1180),b2=osc('square',1340),bm=AC.createGain(),tr=AC.createGain();b1.connect(bm);b2.connect(bm);bm.gain.value=.5;tr.gain.value=0;bm.connect(tr);
+ const lfo=osc('square',24),lg=AC.createGain();lg.gain.value=.5;lfo.connect(lg);lg.connect(tr.gain);const off=AC.createConstantSource?AC.createConstantSource():null;if(off){off.offset.value=.5;off.connect(tr.gain);off.start()}
+ N.ring=vo(tr,'bandpass',1500,1.2);
+ N.busy=vo(osc('sine',425));
+ N.ro=osc('sawtooth',70);N.rise=vo(N.ro,'lowpass',1300);
  N.ch=[110,165,220,330].map(f=>vo(osc('triangle',f)));
- N.wait=vo(noise(),'bandpass',1800,2);
  N.out=out;N.nb=nb;
 }
 function shot(kind){if(!AC)return;const t0=AC.currentTime,gg=AC.createGain();gg.connect(N.out);
@@ -434,12 +423,10 @@ const SPEAK='Je suis la tour des possibles, et j\'ai une question pour toi. Quel
 function speak(){try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(SPEAK);u.lang='fr-FR';u.rate=.88;u.pitch=.85;const v=speechSynthesis.getVoices().find(x=>/^fr/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
 function hush(){try{if('speechSynthesis' in window)speechSynthesis.cancel()}catch(e){}}
 function audio(t,S,on){if(!AC)return;const now=AC.currentTime,set=(gg,v)=>gg.gain.setTargetAtTime(on?v:0,now,.05);const k=S.k,u=S.u,rs=cueAt(RS,t),rc=cueAt(RC,t),enc=rs?rs[2]:'';
- set(N.breath,enc==='A01'?.08+.16*breath(t):0);
- set(N.ring,(rc&&rc[2]==='A02')||enc==='A02'?.08*ring(u):0);
- set(N.hum,enc==='A06'?.045:0);set(N.hiss,enc==='A06'?.012:0);
- N.pad.forEach((gg,i)=>set(gg,k==='voix'?.025*sm(0,1.5,u)*(1-sm(6.5,8,u)):0));
- set(N.wait,rc&&rc[2]==='A03'?.07*Math.sin(Math.PI*cl(u/3)):0);
- if(k==='charge'){set(N.rise,u<6.2?.04+.05*u/6:0);N.ro.frequency.setTargetAtTime(80*Math.pow(10,cl(u/6.2)),now,.05)}else set(N.rise,0);
+ set(N.breath,enc==='A01'?(k==='voix'||k==='appel'?.05:.08)+.14*breath(t):0);
+ set(N.ring,rc&&rc[2]==='A02'?.07*ring(u):0);
+ set(N.busy,rc&&rc[2]==='A03'?(u%1<.5?.06:0):0);
+ if(k==='envoi'){set(N.rise,u<3.3?.04+.05*u/3:0);N.ro.frequency.setTargetAtTime(70*Math.pow(10,cl(u/3.3)),now,.05)}else set(N.rise,0);
  N.ch.forEach((gg,i)=>set(gg,k==='emis'&&u<23?(.02+.05*cl((u-1)/22))*(i<3?1:cl((u-12)/10)):k==='emis'&&u<30?.05*Math.exp(-(u-23)*.6)*(i===0?1:.5):0));
 }
 /* state + loop */
@@ -448,13 +435,12 @@ const scrub=$('scrub'),pb=$('play'),tl=$('tl'),ph=$('ph');
 function render(){const S=model(t);drawBand();drawTower(S);
  $('tc').innerHTML='<b>'+fmt0(t)+'</b> / 3:40';scrub.value=t.toFixed(1);scrub.style.setProperty('--p',(t/T*100)+'%');
  $('nt').textContent=fmt0(S.m[0])+' à '+fmt0(S.m[1]);$('nn').textContent=S.m[3];$('np').textContent=NOW[S.k];
- const n=S.ch;$('gauge').innerHTML=Array.from({length:10},(_,i)=>'<i class="'+(i<n?'f':'')+'"></i>').join('');$('gt').textContent=n===0?'Tore vide, la tour vient d\'émettre':'Charge : '+n+' vœu'+(n>1?'x':'')+' sur 10';
+ const n=S.n;$('gauge').innerHTML=Array.from({length:10},(_,i)=>'<i class="'+(i<n?'f':'')+'"></i>').join('');$('gt').textContent='Compteur de vœux, invisible pour le public : '+n+' sur 10';
  const [cls,hh]=screenHTML(S,t),sc=$('scr');sc.className='scr '+cls;sc.innerHTML=hh;
- $('bi').textContent=(S.k==='charge'&&S.u>=4)||(S.k==='emis'&&S.u<23.3)||(t>=92&&t<96)?'état de charge affiché':'';
  ph.style.left='calc(var(--lw) + (100% - var(--lw)) * '+(t/T)+')';
  document.querySelectorAll('.bk.st').forEach(b=>b.classList.toggle('on',+b.dataset.t===S.m[0]));
  audio(t,S,playing&&sound);
- if(playing&&sound){[[56,'bip'],[111,'bip'],[88.2,'imp'],[195,'tir']].forEach(([x,kd])=>{if(prevT<x&&t>=x)shot(kd)});if(sp===1&&[48,103].some(x=>prevT<x&&t>=x))speak()}
+ if(playing&&sound){[[56,'bip'],[111,'bip'],[85,'imp'],[195,'tir']].forEach(([x,kd])=>{if(prevT<x&&t>=x)shot(kd)});if(sp===1&&[48,103].some(x=>prevT<x&&t>=x))speak()}
  prevT=t;
 }
 function loop(ts){if(!playing)return;const dt=Math.min(.1,(ts-last)/1000)*sp;last=ts;t+=dt;if(t>=T){t=T-.05;setPlay(false);return}render();requestAnimationFrame(loop)}
@@ -472,7 +458,7 @@ tl.addEventListener('pointermove',e=>{if(drag)seek(tlx(e))});
 tl.addEventListener('pointerup',()=>{drag=false});tl.addEventListener('pointercancel',()=>{drag=false});
 document.addEventListener('keydown',e=>{const tg=e.target.tagName;if(tg==='INPUT'||tg==='SUMMARY'||tg==='BUTTON'||e.target.closest('#ft'))return;if(e.code==='Space'){e.preventDefault();setPlay(!playing)}else if(e.key==='ArrowRight')seek(t+1);else if(e.key==='ArrowLeft')seek(t-1)});
 const ro=new ResizeObserver(()=>{size();fitLabels();render()});ro.observe(cv);ro.observe(tl);
-size();fitLabels();seek(66);
+size();fitLabels();seek(86);
 }
 </script>
 </body>

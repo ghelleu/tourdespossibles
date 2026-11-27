@@ -88,7 +88,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid
 .bk.mic{background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(157,180,214,.22) 4px 6px);box-shadow:inset 0 0 0 1px rgba(157,180,214,.35)}
 .bk.st{background:transparent;color:var(--mute);text-align:left;padding-left:6px;border-left:1px solid #3A3F47;border-radius:0;font-size:12px}
 .bk.st.on{color:#FFFDF8;border-left-color:#FFFDF8}
-.bk.nar{color:transparent}
+.bk.nar{color:transparent!important}
 .ax{position:relative;height:18px;font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
 .ax span{position:absolute;transform:translateX(-50%)}
 #ph{position:absolute;top:18px;bottom:0;width:1px;background:#FFFDF8;pointer-events:none;box-shadow:0 0 8px rgba(255,253,248,.6)}
@@ -166,10 +166,37 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 @media(max-width:560px){.top{grid-template-columns:minmax(0,1fr)}.dev{width:min(100%,260px)}}
 .right .r{min-height:24px}.right .tr{height:22px}.right .bk{line-height:16px;font-size:10.5px;letter-spacing:-.01em}.right .g{margin-top:6px;padding-top:6px}.right .g .k{font-size:11px}.right .ax{height:16px}#ph{top:16px}
 .top{grid-template-columns:minmax(0,1fr) 164px}.dev{width:164px}.scr .bg{font-size:20px}.scr .fr{font-size:11px}.scr .en{font-size:10.5px}
+
+/* nettoyage */
+.wide{max-width:none;padding-left:clamp(16px,2vw,32px);padding-right:clamp(16px,2vw,32px)}
+.hero{padding:16px 0 28px}
+.hero h1{font-size:clamp(22px,2.2vw,30px);text-shadow:0 0 1px rgba(255,250,240,.8),0 0 10px rgba(255,246,232,.35)}
+.hero .lead{font-size:14px;margin-top:4px}
+.stage{margin-top:14px;align-items:start}
+.fig{height:calc(100svh - 150px);min-height:440px;max-height:900px}
+.now .t{font-size:12px}
+.right .tl{--lw:92px;margin-top:22px}
+.right .r .k{font-size:12px}
+.right .g{border-top-color:#15181D}
+.right .g .k{font-size:10.5px;letter-spacing:.1em}
+.right .ax{font-size:10.5px}
+.bk{top:3px;bottom:3px;border-radius:2px}
+.bk.l{background:rgba(255,236,205,.15);box-shadow:none;color:#F3E3C8}
+.bk.s{background:rgba(157,180,214,.17);box-shadow:none;color:#C9D6EA}
+.bk.e{background:rgba(255,255,255,.07);box-shadow:none;color:#B9BEC6}
+.bk.mic{background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(157,180,214,.2) 4px 5px);box-shadow:none}
+.bk.opt{background:none;background-image:none;box-shadow:inset 0 0 0 1px rgba(157,180,214,.4);color:var(--son)}
+.bk.st{top:4px;bottom:4px;border-left:1px solid #2A2F37;color:var(--dim);font-size:11px;padding-left:5px;line-height:14px}
+.bk.st.on{color:#FFFDF8;border-left-color:#FFFDF8;background:rgba(255,255,255,.05)}
+#ph{width:1px;background:rgba(255,253,248,.9);box-shadow:none}
+.right .lg{gap:4px 16px;font-size:11.5px;color:var(--dim)}
+.right .lg i{width:9px;height:9px}
+.dev{box-shadow:inset 0 1px 0 #22262D}
+@media(max-width:900px){.fig{height:clamp(420px,70vh,620px)}}
 </style>
 </head>
 <body>
-<div class="bar"><div class="w">
+<div class="bar"><div class="w wide">
 <span class="brand">La Tour des Possibles</span>
 <button class="pb" id="play" type="button" aria-label="Lecture"><svg id="pi" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg></button>
 <span class="tc" id="tc"><b>0:00</b> / 3:40</span>
@@ -179,13 +206,13 @@ footer{padding:40px 0 56px;color:var(--dim);font-size:13px;border-top:1px solid 
 </div></div>
 
 
-<header class="hero"><div class="w">
+<header class="hero"><div class="w wide">
 <h1>Partition son et lumière</h1>
 <p class="lead">Séquence d'exemple de 3 min 40. Codes : L lumière, A audio, E écran.</p>
 <div class="stage">
 <div>
 <div class="fig"><canvas id="tower" role="img" aria-label="La tour en élévation, ses zones lumineuses à l'instant choisi"></canvas></div>
-<div class="band"><canvas id="bandc" width="377" height="10"></canvas><div class="sub"><span>Bandeau du tore déroulé, 377 × 10 pixels</span></div></div>
+<canvas id="bandc" width="377" height="10" hidden></canvas>
 </div>
 <div class="right">
 <div class="top">
@@ -357,7 +384,7 @@ function drawTower(S){
  c.setTransform(DPR,0,0,DPR,0,0);const w=TW,h=TH;c.clearRect(0,0,w,h);
  const sky=c.createRadialGradient(w*.45,h*.95,10,w*.45,h*.9,Math.max(w,h)*.6);sky.addColorStop(0,'#141210');sky.addColorStop(1,'#07080A');c.fillStyle=sky;c.fillRect(0,0,w,h);
  for(let i=0;i<70;i++){const x=h2(i,3)*w,y=h2(i,9)*h*.85,a=.15+.45*h2(i,5);c.fillStyle='rgba(220,230,255,'+a+')';c.fillRect(x,y,1,1)}
- const narrow=w<520,gy=h-38,s=Math.min((gy-22)/16.6,(w-(narrow?30:230))/14.4),cx=narrow?w/2:Math.max(w*.42,6.8*s+40);
+ const narrow=true,s=Math.min((h-40)/17.2,(w-56)/12.6),gy=h/2+17.1*s/2-1.2*s,cx=w/2+14;
  const Y=m=>gy-m*s,ryK=.16;
  c.fillStyle='#0E0D0C';c.beginPath();c.ellipse(cx,gy,7.4*s,7.4*s*ryK,0,0,7);c.fill();
  const L=[30,150,270].map(a=>{const r=a*Math.PI/180;return{x:cx+5.5*s*Math.cos(r),y:gy+5.5*s*ryK*Math.sin(r),back:a===270,wash:true}});
@@ -391,7 +418,7 @@ function drawTower(S){
  if(!S.off){c.fillStyle='#55505A';c.beginPath();c.roundRect(ex+.1*s,py-.24*s,.34*s,.09*s,.04*s);c.fill()}
  if(S.off){const fx=ex+1.05*s,fb=gy;c.fillStyle='#2F2C33';c.beginPath();c.roundRect(fx-.17*s,fb-1.5*s,.34*s,.75*s,.1*s);c.fill();c.fillRect(fx-.12*s,fb-.78*s,.1*s,.78*s);c.fillRect(fx+.02*s,fb-.78*s,.1*s,.78*s);c.beginPath();c.arc(fx,fb-1.66*s,.14*s,0,7);c.fill();c.strokeStyle='#2F2C33';c.lineWidth=Math.max(2,.06*s);c.beginPath();c.moveTo(fx-.12*s,fb-1.35*s);c.lineTo(fx-.16*s,fb-1.64*s);c.stroke()}
  c.font='12px system-ui,-apple-system,sans-serif';c.textBaseline='middle';
- const sx=narrow?10:Math.max(10,cx-7*s-30);c.fillStyle='#5E646D';c.strokeStyle='#1C2027';[0,5,10,15].forEach(m=>{c.beginPath();c.moveTo(sx+26,Y(m));c.lineTo(sx+32,Y(m));c.stroke();c.textAlign='left';c.fillText(m+' m',sx,Y(m))});
+ const sx=4;c.fillStyle='#5E646D';c.strokeStyle='#1C2027';[0,5,10,15].forEach(m=>{c.beginPath();c.moveTo(sx+26,Y(m));c.lineTo(sx+32,Y(m));c.stroke();c.textAlign='left';c.fillText(m+' m',sx,Y(m))});
  if(!narrow){const lx=cx+3.4*s+28;const lab=(txt,ty,ax,ay,on)=>{c.strokeStyle='#29272C';c.beginPath();c.moveTo(ax,ay);c.lineTo(lx-8,ty);c.stroke();c.fillStyle=on?'#F4F5F7':'#8B9099';c.textAlign='left';c.fillText(txt,lx,ty)};
   lab('Globe, option',Y(15.6),cx+gr0+2,gyy,S.gl>.05);lab('Sommet, 3 diffuseurs',Y(13.7),cx+6,Y(13.7),Math.max(...S.so)>.4);lab('Mât éclairé par les washs',Y(9),cx+mast*1.5,Y(9),true);lab('Tore, matrice 10 px',Y(hR),cx+rx,yc,true);lab('Écran et téléphone',Y(1.7),ex+sq+.2*s,sy+sq/2,S.off||sc==='E02');lab('3 lests, un wash chacun',Y(.2),WL.x+.65*s,WL.y-.6*s,false)}
 }
@@ -409,7 +436,7 @@ function lane(id,R,cls,filter){$(id).innerHTML=R.filter(r=>!filter||filter(r[2])
 lane('t_to',RL,'l',ZONE.to);$('t_wa').innerHTML='<div class="bk l" data-t="0" data-w="220" style="left:1px;width:calc(100% - 2px);opacity:.55" title="Washs fixes, toute la tour">fixes, toute la tour</div>';lane('t_so',RL,'l',ZONE.so);lane('t_gl',RL,'l',ZONE.gl);lane('t_co',RC,'s');lane('t_en',RS,'s');lane('t_rf',RR,'s opt');lane('t_ec',RE,'e');
 $('t_st').innerHTML=MOM.map(m=>'<div class="bk st" data-t="'+m[0]+'" data-w="'+(m[1]-m[0])+'" style="left:'+pct(m[0])+';width:'+pct(m[1]-m[0])+'" title="'+esc(m[3])+'">'+esc(SHORT[m[2]])+'</div>').join('');
 $('ax').innerHTML=[0,30,60,90,120,150,180,210].map(t=>'<span style="left:'+pct(t)+'">'+fmt0(t)+'</span>').join('');
-function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw;b.classList.toggle('nar',px<(b.classList.contains('st')?44:22))})}
+function fitLabels(){const tw=$('t_to').clientWidth;document.querySelectorAll('.bk').forEach(b=>{const px=+b.dataset.w/T*tw-2,need=b.textContent.length*(b.classList.contains('st')?6.2:6.1)+(b.classList.contains('st')?8:4);b.classList.toggle('nar',px<need)})}
 /* states and files */
 const chip=code=>'<span class="chip '+(code[0]==='L'?'l':code[0]==='A'?'s':'e')+'">'+code+'</span>';
 $('states').innerHTML=STATES.map((s,i)=>'<details class="st2"'+(i===0?' open':'')+'><summary><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="sn">'+esc(s[0])+'<span>'+esc(s[1])+'</span></span><span class="du">'+esc(s[2])+'</span><span class="pl"></span></summary><div class="body"><div></div><div><h4>Ce que vit le visiteur</h4><p>'+esc(s[4])+'</p></div><div><h4>Lumière</h4><p>'+esc(s[5])+'</p></div><div><h4>Son et écran</h4><p>'+esc(s[6])+'</p></div><div class="fx">'+s[7].map(chip).join('')+'<button class="go" type="button" data-t="'+s[3]+'">Voir dans la séquence</button></div></div></details>').join('');
